@@ -33,7 +33,7 @@ function Nav() {
     <nav className="ws-nav" style={{ position: "sticky", top: 0, zIndex: 50 }}>
       <div className="ws-container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "68px", position: "relative" }}>
         {/* Logo */}
-        <a href="/" style={{ display: "flex", alignItems: "center", gap: "0.5rem", textDecoration: "none", flexShrink: 0 }}>
+        <a href="https://warmsides.com/" и добавь target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "0.5rem", textDecoration: "none", flexShrink: 0 }}>
           <div className="ws-logo-mark">W</div>
           <span style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.2rem", color: "#4A2E1A", letterSpacing: "-0.01em" }}>
             Warmsides
