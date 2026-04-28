@@ -553,7 +553,7 @@ function Reviews() {
 
 /* ─── CONTACT ─── */
 function Contact() {
-  const [form, setForm] = useState({ name: "", phone: "" });
+  const [form, setForm] = useState({ name: "", phone: "", service: "", comment: "" });
   const [sent, setSent] = useState(() => new URLSearchParams(window.location.search).get("success") === "true");
   const [error, setError] = useState(false);
 
@@ -565,6 +565,8 @@ function Contact() {
         "form-name": "contact",
         name: form.name,
         phone: form.phone,
+        service: form.service,
+        comment: form.comment,
       });
       const res = await fetch("/", {
         method: "POST",
@@ -629,14 +631,27 @@ function Contact() {
           <div className="fade-up fade-up-delay-1">
             <div className="ws-card" style={{ padding: "2.5rem" }}>
               {sent ? (
-                <div style={{ textAlign: "center", padding: "2rem 0" }}>
-                  <div style={{ width: "3.5rem", height: "3.5rem", borderRadius: "50%", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.25rem" }}>
-                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#FFFAF5" strokeWidth="3">
+                <div style={{ textAlign: "center", padding: "2.5rem 1rem" }}>
+                  <div style={{ width: "5rem", height: "5rem", borderRadius: "50%", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.75rem", boxShadow: "0 8px 24px rgba(201,96,58,0.3)" }}>
+                    <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#FFFAF5" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 700, color: "#4A2E1A", marginBottom: "0.5rem" }}>Дякуємо!</h3>
-                  <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "0.95rem" }}>Ми зв'яжемося з вами найближчим часом.</p>
+                  <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.75rem", color: "#4A2E1A", marginBottom: "0.75rem" }}>Дякуємо за заявку!</h3>
+                  <p style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "1rem", lineHeight: 1.6, marginBottom: "1.5rem" }}>
+                    Менеджер Вікторія зв'яжеться з вами<br />протягом 1–2 годин у робочий час.
+                  </p>
+                  <div style={{ background: "#FFF3ED", borderRadius: "0.75rem", padding: "1rem 1.25rem", marginBottom: "1.75rem" }}>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: "#9E7A65", margin: 0 }}>
+                      Якщо терміново — напишіть нам одразу у Telegram
+                    </p>
+                    <a href="https://t.me/NS940828" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#C9603A", textDecoration: "none" }}>
+                      @NS940828
+                    </a>
+                  </div>
+                  <a href="/" style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", textDecoration: "underline" }}>
+                    Повернутися на головну
+                  </a>
                 </div>
               ) : (
                 <form
@@ -648,37 +663,83 @@ function Contact() {
                 >
                   <input type="hidden" name="form-name" value="contact" />
                   <input type="hidden" name="bot-field" />
+
+                  <div style={{ marginBottom: "0.25rem" }}>
+                    <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.4rem", color: "#4A2E1A", margin: "0 0 0.25rem" }}>Залишити заявку</h3>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", margin: 0 }}>Всі поля обов'язкові, крім коментаря</p>
+                  </div>
+
                   <div>
-                    <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Ваше ім'я</label>
+                    <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Ваше ім'я *</label>
                     <input
                       className="ws-input"
                       type="text"
                       name="name"
-                      placeholder="Як до вас звертатися?"
+                      placeholder="Іван Іваненко"
                       value={form.name}
                       onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                       required
                     />
                   </div>
+
                   <div>
-                    <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Телефон або Telegram</label>
+                    <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Телефон або email *</label>
                     <input
                       className="ws-input"
                       type="text"
                       name="phone"
-                      placeholder="+380 або @username"
+                      placeholder="+380 50 123-45-67 або hello@example.com"
                       value={form.phone}
                       onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
                       required
                     />
                   </div>
+
+                  <div>
+                    <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Тип послуги *</label>
+                    <div style={{ position: "relative" }}>
+                      <select
+                        className="ws-input"
+                        name="service"
+                        value={form.service}
+                        onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
+                        required
+                        style={{ appearance: "none", WebkitAppearance: "none", cursor: "pointer", color: form.service ? "#4A2E1A" : "#9E7A65" }}
+                      >
+                        <option value="" disabled>Оберіть послугу</option>
+                        <option value="Розробка сайту">Розробка сайту</option>
+                        <option value="Інтернет-магазин">Інтернет-магазин</option>
+                        <option value="Мобільний застосунок">Мобільний застосунок</option>
+                        <option value="Інше">Інше</option>
+                      </select>
+                      <svg style={{ position: "absolute", right: "1rem", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#9E7A65" }} width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>
+                      Коментар <span style={{ fontWeight: 400, color: "#9E7A65" }}>(необов'язково)</span>
+                    </label>
+                    <textarea
+                      className="ws-input"
+                      name="comment"
+                      placeholder="Розкажіть про проєкт: що потрібно зробити, які терміни, особливі побажання..."
+                      value={form.comment}
+                      onChange={e => setForm(f => ({ ...f, comment: e.target.value }))}
+                      rows={4}
+                      style={{ resize: "vertical", minHeight: "7rem" }}
+                    />
+                  </div>
+
                   {error && (
                     <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#C9603A", margin: 0, textAlign: "center" }}>
                       Помилка відправки. Спробуйте ще раз або напишіть на hello@warmsides.com
                     </p>
                   )}
-                  <button type="submit" className="btn-primary" style={{ width: "100%", textAlign: "center", marginTop: "0.5rem" }}>
-                    Відправити
+                  <button type="submit" className="btn-primary" style={{ width: "100%", textAlign: "center", marginTop: "0.25rem" }}>
+                    Відправити заявку
                   </button>
                   <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "#9E7A65", textAlign: "center", margin: 0 }}>
                     Менеджер Вікторія · Зазвичай відповідаємо за 1–2 год
