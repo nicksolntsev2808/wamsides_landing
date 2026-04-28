@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 /* ─── FADE-UP HOOK ─── */
 function useFadeUp() {
   useEffect(() => {
@@ -552,10 +558,61 @@ function Reviews() {
 }
 
 /* ─── CONTACT ─── */
+function SectionTracker({ eventName }: { eventName: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let fired = false;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !fired) {
+          fired = true;
+          if (typeof window.gtag === "function") {
+            window.gtag("event", eventName, {
+              event_category: "engagement",
+              event_label: eventName,
+            });
+          }
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [eventName]);
+  return <div ref={ref} style={{ height: 0, pointerEvents: "none" }} />;
+}
+
 function Contact() {
   const [form, setForm] = useState({ name: "", phone: "", service: "", comment: "" });
   const [sent, setSent] = useState(() => new URLSearchParams(window.location.search).get("success") === "true");
   const [error, setError] = useState(false);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = formRef.current;
+    if (!el) return;
+    let fired = false;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !fired) {
+          fired = true;
+          if (typeof window.gtag === "function") {
+            window.gtag("event", "form_view", {
+              event_category: "engagement",
+              event_label: "contact_form",
+            });
+          }
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -584,6 +641,8 @@ function Contact() {
   };
 
   return (
+    <>
+    <SectionTracker eventName="scroll_to_form" />
     <section id="contact" style={{ background: "#FFFAF5", padding: "6rem 0" }}>
       <div className="ws-container">
         <div className="ws-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "start" }}>
@@ -629,7 +688,7 @@ function Contact() {
 
           {/* Right — form */}
           <div className="fade-up fade-up-delay-1">
-            <div className="ws-card" style={{ padding: "2.5rem" }}>
+            <div ref={formRef} className="ws-card" style={{ padding: "2.5rem" }}>
               {sent ? (
                 <div style={{ textAlign: "center", padding: "2.5rem 1rem" }}>
                   <div style={{ width: "5rem", height: "5rem", borderRadius: "50%", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.75rem", boxShadow: "0 8px 24px rgba(201,96,58,0.3)" }}>
@@ -751,6 +810,7 @@ function Contact() {
         </div>
       </div>
     </section>
+    </>
   );
 }
 
