@@ -554,7 +554,7 @@ function Reviews() {
 /* ─── CONTACT ─── */
 function Contact() {
   const [form, setForm] = useState({ name: "", phone: "" });
-  const [sent, setSent] = useState(false);
+  const [sent, setSent] = useState(() => new URLSearchParams(window.location.search).get("success") === "true");
   const [error, setError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -572,7 +572,7 @@ function Contact() {
         body: body.toString(),
       });
       if (res.ok) {
-        setSent(true);
+        window.location.href = "/?success=true";
       } else {
         setError(true);
       }
