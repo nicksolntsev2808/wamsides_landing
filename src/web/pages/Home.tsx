@@ -574,7 +574,7 @@ function Contact() {
         body: body.toString(),
       });
       if (res.ok) {
-        window.location.href = "/?success=true";
+        window.location.href = "/success.html?success=true";
       } else {
         setError(true);
       }
