@@ -739,6 +739,7 @@ function Contact() {
                       type="text"
                       name="name"
                       placeholder="Іван Іваненко"
+                      autoComplete="name"
                       value={form.name}
                       onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                       required
@@ -752,6 +753,7 @@ function Contact() {
                       type="text"
                       name="phone"
                       placeholder="+380 50 123-45-67 або hello@example.com"
+                      autoComplete="tel"
                       value={form.phone}
                       onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
                       required
