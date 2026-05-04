@@ -587,7 +587,7 @@ function SectionTracker({ eventName }: { eventName: string }) {
 }
 
 function Contact() {
-  const [form, setForm] = useState({ name: "", phone: "", service: "", comment: "" });
+  const [form, setForm] = useState({ name: "", phone: "" });
   const [sent, setSent] = useState(() => new URLSearchParams(window.location.search).get("success") === "true");
   const [error, setError] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
@@ -628,8 +628,6 @@ function Contact() {
         "form-name": "contact",
         name: form.name,
         phone: form.phone,
-        service: form.service,
-        comment: form.comment,
       });
       const res = await fetch("/", {
         method: "POST",
@@ -730,8 +728,8 @@ function Contact() {
                   <input type="hidden" name="bot-field" />
 
                   <div style={{ marginBottom: "0.25rem" }}>
-                    <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.4rem", color: "#4A2E1A", margin: "0 0 0.25rem" }}>Залишити заявку</h3>
-                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", margin: 0 }}>Всі поля обов'язкові, крім коментаря</p>
+                    <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.4rem", color: "#4A2E1A", margin: "0 0 0.25rem" }}>Дізнайтеся вартість вашого сайту</h3>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", margin: 0 }}>Розрахуємо вартість і розповімо про етапи запуску</p>
                   </div>
 
                   <div>
@@ -760,51 +758,13 @@ function Contact() {
                     />
                   </div>
 
-                  <div>
-                    <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Тип послуги *</label>
-                    <div style={{ position: "relative" }}>
-                      <select
-                        className="ws-input"
-                        name="service"
-                        value={form.service}
-                        onChange={e => setForm(f => ({ ...f, service: e.target.value }))}
-                        required
-                        style={{ appearance: "none", WebkitAppearance: "none", cursor: "pointer", color: form.service ? "#4A2E1A" : "#9E7A65" }}
-                      >
-                        <option value="" disabled>Оберіть послугу</option>
-                        <option value="Розробка сайту">Розробка сайту</option>
-                        <option value="Інтернет-магазин">Інтернет-магазин</option>
-                        <option value="Мобільний застосунок">Мобільний застосунок</option>
-                        <option value="Інше">Інше</option>
-                      </select>
-                      <svg style={{ position: "absolute", right: "1rem", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", color: "#9E7A65" }} width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>
-                      Коментар <span style={{ fontWeight: 400, color: "#9E7A65" }}>(необов'язково)</span>
-                    </label>
-                    <textarea
-                      className="ws-input"
-                      name="comment"
-                      placeholder="Розкажіть про проєкт: що потрібно зробити, які терміни, особливі побажання..."
-                      value={form.comment}
-                      onChange={e => setForm(f => ({ ...f, comment: e.target.value }))}
-                      rows={4}
-                      style={{ resize: "vertical", minHeight: "7rem" }}
-                    />
-                  </div>
-
                   {error && (
                     <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#C9603A", margin: 0, textAlign: "center" }}>
                       Помилка відправки. Спробуйте ще раз або напишіть на hello@warmsides.com
                     </p>
                   )}
                   <button type="submit" className="btn-primary" style={{ width: "100%", textAlign: "center", marginTop: "0.25rem" }}>
-                    Відправити заявку
+                    Дізнатися вартість
                   </button>
                   <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "#9E7A65", textAlign: "center", margin: 0 }}>
                     Менеджер Вікторія · Зазвичай відповідаємо за 1–2 год
