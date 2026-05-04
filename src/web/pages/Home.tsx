@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    fbq?: (...args: unknown[]) => void;
   }
 }
 
@@ -603,6 +604,11 @@ function Contact() {
             window.gtag("event", "form_view", {
               event_category: "engagement",
               event_label: "contact_form",
+            });
+          }
+          if (typeof window.fbq === "function") {
+            window.fbq("track", "ViewContent", {
+              content_name: "contact_form",
             });
           }
           observer.disconnect();
