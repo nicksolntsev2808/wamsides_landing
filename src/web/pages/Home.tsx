@@ -359,69 +359,6 @@ function Results() {
 }
 
 
-/* ─── WHO IT'S FOR ─── */
-function WhoFor() {
-  const items = [
-    "Кому важливий не просто запуск, а реальні заявки та продажі",
-    "Кому потрібно вкластися в розумний бюджет без зайвих рішень",
-    "Кому потрібні досвічені спеціалісти, а не фріланс-ентузіасти",
-  ];
-
-  return (
-    <section id="who" style={{ background: "#FFFAF5", padding: "6rem 0" }}>
-      <div className="ws-container ws-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
-        <div>
-          <div className="fade-up">
-            <span className="ws-tag">Кому підходить</span>
-            <div className="ws-divider"></div>
-            <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.4rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "1rem", lineHeight: 1.2 }}>
-              Кому потрібен наш підхід?
-            </h2>
-            <p style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "1rem", lineHeight: 1.75, marginBottom: "2rem" }}>
-              Наш підхід — це про результат, а не про формальність.
-            </p>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            {items.map((item, i) => (
-              <div key={i} className={`fade-up fade-up-delay-${i + 1}`} style={{ display: "flex", gap: "0.875rem", alignItems: "flex-start" }}>
-                <div className="ws-check">
-                  <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#FFFAF5" strokeWidth="3">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <p style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "0.95rem", lineHeight: 1.65, margin: 0 }}>{item}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Visual element */}
-        <div className="fade-up fade-up-delay-2" style={{ display: "flex", justifyContent: "center" }}>
-          <div style={{ position: "relative", width: "100%", maxWidth: "380px" }}>
-            <div style={{ background: "linear-gradient(135deg, #C9603A, #E8895A)", borderRadius: "2rem", padding: "2.5rem", color: "#FFFAF5" }}>
-              <div style={{ fontFamily: "Raleway, sans-serif", fontWeight: 900, fontSize: "4rem", lineHeight: 1, marginBottom: "0.5rem" }}>10+</div>
-              <div style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.1rem", opacity: 0.9, marginBottom: "2rem" }}>років у веб-розробці</div>
-              <div style={{ display: "flex", gap: "2rem" }}>
-                <div>
-                  <div style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "2rem", lineHeight: 1 }}>40+</div>
-                  <div style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", opacity: 0.8, marginTop: "0.25rem" }}>проєктів</div>
-                </div>
-                <div>
-                  <div style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "2rem", lineHeight: 1 }}>4</div>
-                  <div style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", opacity: 0.8, marginTop: "0.25rem" }}>тижні</div>
-                </div>
-                <div>
-                  <div style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "2rem", lineHeight: 1 }}>3</div>
-                  <div style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", opacity: 0.8, marginTop: "0.25rem" }}>країни</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ─── REVIEWS ─── */
 function Reviews() {
@@ -582,22 +519,52 @@ function Contact() {
             <div className="fade-up">
               <span className="ws-tag">Контакт</span>
               <div className="ws-divider"></div>
-              <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.4rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "1rem", lineHeight: 1.2 }}>
-                Дізнайтеся бюджет
+              <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.4rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.75rem", lineHeight: 1.2 }}>
+                Отримайте план і вартість безкоштовно
               </h2>
-              <p style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "1rem", lineHeight: 1.75, marginBottom: "2rem" }}>
-                Під час зустрічі-знайомства:
+              <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "1rem", lineHeight: 1.75, marginBottom: "2rem" }}>
+                Залиште контакт — і ми зробимо все інше
               </p>
             </div>
-            <div className="fade-up fade-up-delay-1" style={{ display: "flex", flexDirection: "column", gap: "0.875rem", marginBottom: "2.5rem" }}>
-              {["Розберемо вашу задачу", "Запропонуємо оптимальне рішення", "Зорієнтуємо по бюджету"].map((item, i) => (
-                <div key={i} style={{ display: "flex", gap: "0.875rem", alignItems: "flex-start" }}>
-                  <div className="ws-check">
-                    <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#FFFAF5" strokeWidth="3">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+
+            <div className="fade-up fade-up-delay-1" style={{ display: "flex", flexDirection: "column", gap: "1rem", marginBottom: "2.5rem" }}>
+              {[
+                {
+                  icon: (
+                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
+                  ),
+                  title: "Безкоштовна консультація",
+                  desc: "Розберемо вашу ідею і запропонуємо рішення",
+                },
+                {
+                  icon: (
+                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  ),
+                  title: "Розрахунок вартості",
+                  desc: "Отримаєте точну цифру під ваш проєкт",
+                },
+                {
+                  icon: (
+                    <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  ),
+                  title: "Відповідь за 10 хвилин",
+                  desc: "Менеджер зв'яжеться і відповість на всі питання",
+                },
+              ].map((item, i) => (
+                <div key={i} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+                  <div style={{ width: "2.75rem", height: "2.75rem", borderRadius: "0.75rem", background: "#FFF3ED", border: "1px solid #E8D5C0", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    {item.icon}
                   </div>
-                  <p style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "0.95rem", lineHeight: 1.65, margin: 0 }}>{item}</p>
+                  <div>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#4A2E1A", margin: "0 0 0.2rem" }}>{item.title}</p>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", margin: 0, lineHeight: 1.5 }}>{item.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -757,7 +724,6 @@ export default function Home() {
       <Hero />
       <Solution />
       <Results />
-      <WhoFor />
       <Reviews />
       <Contact />
       <Footer />
