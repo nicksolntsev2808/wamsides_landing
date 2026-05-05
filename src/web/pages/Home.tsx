@@ -123,7 +123,7 @@ function Hero() {
 
         {/* Sub */}
         <p className="fade-up fade-up-delay-2" style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.15rem", color: "#5C3D2E", maxWidth: "560px", lineHeight: 1.75, marginBottom: "2.5rem" }}>
-          Warmsides — тепла студія, яка проектує лендинги з UX-логіки, а не з картинок. Структура під вашу ЦА, mobile-first підхід, результат, який можна виміряти.
+          Розробляємо сайти під ключ — від дизайну до запуску. Готовність до реклами за 4 тижні.
         </p>
 
         {/* CTAs */}
@@ -134,6 +134,33 @@ function Hero() {
           <button className="btn-outline" onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}>
             Наші послуги
           </button>
+        </div>
+
+        {/* Avatars + social proof */}
+        <div className="fade-up fade-up-delay-4" style={{ marginTop: "1.75rem", display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {[
+              { initials: "АК", bg: "#C9603A" },
+              { initials: "МС", bg: "#8B6347" },
+              { initials: "ОП", bg: "#5C3D2E" },
+              { initials: "ДЛ", bg: "#C9603A" },
+              { initials: "ІВ", bg: "#8B6347" },
+            ].map((a, i) => (
+              <div key={i} style={{ width: "2.25rem", height: "2.25rem", borderRadius: "50%", background: a.bg, border: "2px solid #FFFAF5", marginLeft: i === 0 ? 0 : "-0.6rem", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 5 - i }}>
+                <span style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.65rem", color: "#FFFAF5" }}>{a.initials}</span>
+              </div>
+            ))}
+          </div>
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: "2px", marginBottom: "2px" }}>
+              {[1,2,3,4,5].map(i => (
+                <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="#C9603A"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              ))}
+            </div>
+            <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "#5C3D2E" }}>
+              <strong>100+ підприємців</strong> вже обрали нас
+            </span>
+          </div>
         </div>
 
         {/* Social proof */}
