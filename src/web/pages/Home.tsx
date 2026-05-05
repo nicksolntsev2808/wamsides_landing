@@ -306,7 +306,7 @@ function Results() {
           <span className="ws-tag">Що ви отримаєте</span>
           <div className="ws-divider" style={{ margin: "1rem auto" }}></div>
           <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.75rem" }}>
-            Є ідея — зробимо сайт який продає
+            Зробимо сайт який продає
           </h2>
           <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "1rem", maxWidth: "460px", lineHeight: 1.75, margin: "0 auto" }}>
             Беремо на себе все — від структури до запуску
@@ -348,25 +348,21 @@ function Results() {
 function Reviews() {
   const reviews = [
     {
-      quote: "Нарешті лендинг працює! Раніше ми вже запускали лендинг, але якість лідів була низькою. З Warmsides пропрацювали цільову аудиторію, їх потреби і структуру сторінки. Це кардинально вплинуло на якість заявок.",
+      quote: "З Warmsides пропрацювали цільову аудиторію і структуру сторінки. Це кардинально вплинуло на якість заявок.",
       name: "Наталія Сотніченко",
       role: "Співвласниця школи англійської NaEasy",
     },
     {
-      quote: "Все по суті 🔥 Запустили інтернет-магазин із чітким планом розвитку функціоналу. Зручна та зрозуміла адмінка, детальна статистика. Продовжуємо успішно розвивати магазин.",
+      quote: "Запустили інтернет-магазин із чітким планом. Зручна адмінка, детальна статистика. Продовжуємо розвивати магазин. 🔥",
       name: "Андрій Савченко",
       role: "Маркетинговий директор Vapors",
     },
     {
-      quote: "Лайк за свіжий погляд. Під час проєктування дизайнери Warmsides запропонували свіжі ідеї та прості рішення, які зробили продукт зручнішим і логічнішим для користувачів.",
+      quote: "Warmsides запропонували прості рішення, які зробили продукт зручнішим і логічнішим для користувачів.",
       name: "Євген Костін",
       role: "CEO Freudika",
     },
-    {
-      quote: "Smooth launch 👍 We launched our corporate website with Warmsides, and the process was clear and well organized. They helped us structure the content and stay within a reasonable budget.",
-      name: "Erwin Hunsen",
-      role: "Product Manager at Prepr",
-    },
+
   ];
 
   return (
@@ -556,7 +552,7 @@ function Contact() {
                     className="ws-input"
                     type="text"
                     name="name"
-                    placeholder="Іван Іваненко"
+                    placeholder="Ім'я"
                     autoComplete="name"
                     value={form.name}
                     onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
@@ -570,7 +566,7 @@ function Contact() {
                     className="ws-input"
                     type="text"
                     name="phone"
-                    placeholder="+380 50 123-45-67 або hello@example.com"
+                    placeholder="+380 00 000 00 00"
                     autoComplete="tel"
                     value={form.phone}
                     onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
@@ -586,9 +582,7 @@ function Contact() {
                 <button type="submit" className="btn-primary" style={{ width: "100%", textAlign: "center", marginTop: "0.25rem" }}>
                   Дізнатися вартість
                 </button>
-                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "#9E7A65", textAlign: "center", margin: 0 }}>
-                  Менеджер Вікторія · Зазвичай відповідаємо за 1–2 год
-                </p>
+
               </form>
             )}
           </div>
@@ -640,13 +634,17 @@ function Contact() {
             {/* Contact info */}
             <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", paddingTop: "1.5rem", borderTop: "1px solid #E8D5C0" }}>
               {[
-                { icon: "📍", text: "Київ, Харків · Амстердам" },
-                { icon: "📞", text: "+380 67 531 19 52" },
+                { icon: "📍", text: "Одеса · Амстердам" },
+                { icon: "📞", text: "+380 67 531 19 52", href: "tel:+380675311952" },
                 { icon: "✉️", text: "hello@warmsides.com" },
-              ].map(({ icon, text }) => (
+              ].map(({ icon, text, href }: { icon: string; text: string; href?: string }) => (
                 <div key={text} style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
                   <span style={{ fontSize: "1.1rem" }}>{icon}</span>
-                  <span style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "0.95rem" }}>{text}</span>
+                  {href ? (
+                    <a href={href} style={{ fontFamily: "Nunito, sans-serif", color: "#C9603A", fontSize: "0.95rem", textDecoration: "none", fontWeight: 600 }}>{text}</a>
+                  ) : (
+                    <span style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "0.95rem" }}>{text}</span>
+                  )}
                 </div>
               ))}
             </div>
