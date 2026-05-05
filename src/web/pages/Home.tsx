@@ -81,7 +81,7 @@ function Nav() {
       {/* Mobile dropdown — outside container so it spans full width */}
       {open && (
         <div style={{ background: "#FFFAF5", borderBottom: "1px solid #E8D5C0", padding: "1.5rem", display: "flex", flexDirection: "column", gap: "1rem" }}>
-          {[["Проблема", "problem"], ["Рішення", "solution"], ["Послуги", "services"], ["Відгуки", "reviews"]].map(([label, id]) => (
+          {[["Рішення", "solution"], ["Послуги", "services"], ["Відгуки", "reviews"]].map(([label, id]) => (
             <button key={id} onClick={() => scrollTo(id)} style={{ background: "none", border: "none", cursor: "pointer", fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "1rem", color: "#5C3D2E", textAlign: "left", padding: "0.35rem 0" }}>
               {label}
             </button>
@@ -184,141 +184,98 @@ function Hero() {
   );
 }
 
-/* ─── PROBLEM ─── */
-function Problem() {
-  const problems = [
+
+/* ─── SOLUTION ─── */
+function Solution() {
+  const steps = [
     {
-      text: "Студії продають шаблонні рішення — однакові для всіх",
+      num: "01",
+      title: "Аналіз",
+      desc: "Вивчаємо ваш бізнес, ЦА та конкурентів. Формуємо офер і структуру.",
       icon: (
-        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
       ),
     },
     {
-      text: "Дизайн заради дизайну, без сенсів та аргументів",
+      num: "02",
+      title: "Структура",
+      desc: "Будуємо UX-прототип під вашу аудиторію. Кожен блок має свою роль.",
       icon: (
-        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2">
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+        </svg>
+      ),
+    },
+    {
+      num: "03",
+      title: "Дизайн",
+      desc: "Створюємо mobile-first дизайн з фокусом на конверсію, а не красу заради краси.",
+      icon: (
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
       ),
     },
     {
-      text: "Сайт не враховує контексту та особливостей ЦА",
+      num: "04",
+      title: "Запуск",
+      desc: "Верстаємо, тестуємо та запускаємо. Готовність до реклами за 4 тижні.",
       icon: (
-        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
       ),
     },
-    {
-      text: "Немає аналізу результатів та поведінки відвідувачів",
-      icon: (
-        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-        </svg>
-      ),
-    },
-  ];
-
-  return (
-    <section id="problem" style={{ background: "#F0E6D3", padding: "6rem 0" }}>
-      <div className="ws-container">
-        <div className="fade-up" style={{ marginBottom: "3rem" }}>
-          <span className="ws-tag">Проблема</span>
-          <div className="ws-divider"></div>
-          <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.75rem" }}>
-            Чому більшість сайтів не працює?
-          </h2>
-          <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "1rem", maxWidth: "520px", lineHeight: 1.75 }}>
-            Часто бізнес вкладає гроші в рекламу, але сайт не конвертує. Ось чому це відбувається.
-          </p>
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1.5rem" }}>
-          {problems.map((item, i) => (
-            <div
-              key={i}
-              className={`ws-card fade-up fade-up-delay-${i + 1}`}
-              style={{ background: "#2C1A0E", border: "1px solid rgba(232,213,192,0.1)" }}
-            >
-              <div style={{ width: "2.75rem", height: "2.75rem", borderRadius: "0.75rem", background: "rgba(201,96,58,0.15)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1rem" }}>
-                {item.icon}
-              </div>
-              <p style={{ fontFamily: "Nunito, sans-serif", color: "#F0E6D3", fontSize: "1rem", lineHeight: 1.65, margin: 0 }}>
-                {item.text}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── SOLUTION ─── */
-function Solution() {
-  const features = [
-    "Структура під конкретну ЦА та контекст використання",
-    "Mobile-first підхід в проектуванні та дизайні",
-    "Сенси, які перекривають страхи та заперечення клієнтів",
-    "Чистота без зайвого візуального шуму",
-    "Збір та аналіз даних для покращення ефективності",
   ];
 
   return (
     <section id="solution" style={{ background: "#FFFAF5", padding: "6rem 0" }}>
       <div className="ws-container">
-        <div className="ws-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
-          {/* Left */}
-          <div>
-            <div className="fade-up">
-              <span className="ws-tag">Рішення</span>
-              <div className="ws-divider"></div>
-              <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.4rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "1.25rem", lineHeight: 1.2 }}>
-                Ми робимо лендинги, які ведуть до дії
-              </h2>
-            </div>
-            <p className="fade-up fade-up-delay-1" style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "1rem", lineHeight: 1.75, marginBottom: "2rem" }}>
-              Ми починаємо не з картинок, а з UX-логіки: хто ваш користувач, з якою метою він прийшов і який крок має зробити далі.
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              {features.map((f, i) => (
-                <div key={i} className={`fade-up fade-up-delay-${(i % 4) + 1}`} style={{ display: "flex", gap: "0.875rem", alignItems: "flex-start" }}>
-                  <div className="ws-check">
-                    <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#FFFAF5" strokeWidth="3">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <p style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "0.95rem", lineHeight: 1.6, margin: 0 }}>{f}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="fade-up" style={{ marginBottom: "3rem", textAlign: "center" }}>
+          <span className="ws-tag">Як ми працюємо</span>
+          <div className="ws-divider" style={{ margin: "1rem auto" }}></div>
+          <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.75rem" }}>
+            Від ідеї до сайту за 4 тижні
+          </h2>
+          <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "1rem", maxWidth: "480px", lineHeight: 1.75, margin: "0 auto" }}>
+            Чіткий процес без хаосу та затримок
+          </p>
+        </div>
 
-          {/* Right — CTA card */}
-          <div className="fade-up fade-up-delay-2">
-            <div className="ws-card" style={{ padding: "2.5rem", border: "1px solid #E8D5C0" }}>
-              <div style={{ display: "flex", gap: "2rem", marginBottom: "2rem" }}>
-                {[["4", "тижні до запуску"], ["10+", "років досвіду"], ["40+", "проєктів"]].map(([num, label]) => (
-                  <div key={label}>
-                    <div style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.75rem", color: "#C9603A", lineHeight: 1 }}>{num}</div>
-                    <div style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "#9E7A65", marginTop: "0.25rem" }}>{label}</div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.5rem", marginBottom: "3rem" }}>
+          {steps.map((step, i) => (
+            <div key={i} className={`fade-up fade-up-delay-${i + 1}`} style={{ position: "relative" }}>
+              <div className="ws-card" style={{ height: "100%", border: "1px solid #E8D5C0", padding: "2rem 1.75rem" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.25rem" }}>
+                  <div style={{ width: "3rem", height: "3rem", borderRadius: "0.875rem", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center", color: "#FFFAF5" }}>
+                    {step.icon}
                   </div>
-                ))}
+                  <span style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.5rem", color: "#E8D5C0" }}>{step.num}</span>
+                </div>
+                <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 700, fontSize: "1.1rem", color: "#4A2E1A", margin: "0 0 0.5rem" }}>
+                  {step.title}
+                </h3>
+                <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "0.9rem", lineHeight: 1.65, margin: 0 }}>
+                  {step.desc}
+                </p>
               </div>
-              <p style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "1.05rem", lineHeight: 1.75, marginBottom: "2rem" }}>
-                У результаті ви отримуєте не просто сторінку, а інструмент для стабільного потоку заявок. Ми не роздуваємо бюджет — робимо раціонально.
-              </p>
-              <button
-                className="btn-primary"
-                style={{ width: "100%", textAlign: "center" }}
-                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-              >
-                Дізнатися вартість
-              </button>
+              {i < steps.length - 1 && (
+                <div style={{ display: "none" }} className="step-arrow" />
+              )}
             </div>
-          </div>
+          ))}
+        </div>
+
+        <div className="fade-up" style={{ textAlign: "center" }}>
+          <button
+            className="btn-primary"
+            style={{ fontSize: "1.05rem", padding: "0.9rem 2.5rem" }}
+            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            Розпочати проєкт →
+          </button>
         </div>
       </div>
     </section>
@@ -445,56 +402,6 @@ function Results() {
   );
 }
 
-/* ─── TIMELINE ─── */
-function Timeline() {
-  const steps = [
-    { week: "01", title: "Тиждень 1", desc: "Формуємо задачу, офер, воронку. Визначаємо структуру та функціонал лендингу." },
-    { week: "02", title: "Тиждень 2", desc: "Будуємо деталізований UX-прототип під вашу цільову аудиторію." },
-    { week: "03", title: "Тиждень 3", desc: "Готуємо дизайн із фокусом на мобільні пристрої та конверсію." },
-    { week: "04", title: "Тиждень 4 🚀", desc: "Верстаємо, програмуємо функціонал, наповнюємо контентом, тестуємо та навчаємо адмінці." },
-    { week: "∞", title: "Після запуску", desc: "Аналізуємо поведінку користувачів та вносимо зміни для покращення ефективності." },
-  ];
-
-  return (
-    <section id="timeline" style={{ background: "#F0E6D3", padding: "6rem 0" }}>
-      <div className="ws-container">
-        <div className="fade-up" style={{ marginBottom: "3.5rem" }}>
-          <span className="ws-tag">Календар запуску</span>
-          <div className="ws-divider"></div>
-          <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.5rem" }}>
-            4 тижні від старту до готового результату
-          </h2>
-          <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "0.95rem" }}>
-            За умови оперативного зворотного зв'язку
-          </p>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-          {steps.map((step, i) => (
-            <div key={i} className={`fade-up fade-up-delay-${(i % 4) + 1}`} style={{ display: "flex", gap: "1.5rem", alignItems: "stretch", paddingBottom: i < steps.length - 1 ? "0" : "0" }}>
-              {/* Left: dot + line */}
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
-                <div className="timeline-dot">{step.week}</div>
-                {i < steps.length - 1 && (
-                  <div style={{ width: "2px", flex: 1, minHeight: "2rem", background: "linear-gradient(to bottom, #C9603A, #E8D5C0)", margin: "0.25rem 0" }} />
-                )}
-              </div>
-              {/* Right: content */}
-              <div style={{ paddingBottom: i < steps.length - 1 ? "2rem" : "0", paddingTop: "0.625rem" }}>
-                <h4 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 700, fontSize: "1.05rem", color: "#4A2E1A", margin: 0, marginBottom: "0.375rem" }}>
-                  {step.title}
-                </h4>
-                <p style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "0.9rem", lineHeight: 1.65, margin: 0 }}>
-                  {step.desc}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ─── WHO IT'S FOR ─── */
 function WhoFor() {
@@ -892,11 +799,9 @@ export default function Home() {
     <>
       <Nav />
       <Hero />
-      <Problem />
       <Solution />
       <Services />
       <Results />
-      <Timeline />
       <WhoFor />
       <Reviews />
       <Contact />
