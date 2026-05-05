@@ -116,7 +116,7 @@ function Hero() {
 
         {/* Headline */}
         <h1 className="fade-up fade-up-delay-1" style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(2.2rem, 5vw, 4.5rem)", lineHeight: 1.1, color: "#4A2E1A", maxWidth: "800px", marginBottom: "1.5rem" }}>
-          За 4 тижні запустимо лендинг,{" "}
+          За 4 тижні запустимо сайт,{" "}
           <span className="ws-gradient-text">який приводить заявки</span>,{" "}
           а не зливає трафік
         </h1>
@@ -127,19 +127,30 @@ function Hero() {
         </p>
 
         {/* CTAs */}
-        <div className="fade-up fade-up-delay-3" style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-          <button className="btn-primary" onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
-            Дізнатися вартість
+        <div className="fade-up fade-up-delay-3" style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
+          <button className="btn-primary" style={{ fontSize: "1.05rem", padding: "0.9rem 2rem" }} onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
+            Дізнатися вартість →
           </button>
           <button className="btn-outline" onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}>
             Наші послуги
           </button>
         </div>
 
-        {/* Year badge */}
-        <div className="fade-up fade-up-delay-4" style={{ marginTop: "3.5rem", display: "flex", alignItems: "center", gap: "1rem" }}>
-          <div style={{ width: "3rem", height: "1px", background: "#E8D5C0" }}></div>
-          <span style={{ fontFamily: "Raleway, sans-serif", fontWeight: 700, fontSize: "0.8rem", color: "#9E7A65", letterSpacing: "0.08em", textTransform: "uppercase" }}>2016 — 2026</span>
+        {/* Social proof */}
+        <div className="fade-up fade-up-delay-4" style={{ marginTop: "2rem", display: "flex", alignItems: "center", gap: "1.5rem", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <div style={{ width: "2rem", height: "2rem", borderRadius: "50%", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#FFFAF5" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </div>
+            <span style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#4A2E1A" }}>100+ проєктів</span>
+          </div>
+          <div style={{ width: "1px", height: "1.25rem", background: "#E8D5C0" }}></div>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <div style={{ width: "2rem", height: "2rem", borderRadius: "50%", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#FFFAF5" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </div>
+            <span style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#4A2E1A" }}>4 тижні</span>
+          </div>
         </div>
       </div>
     </section>
