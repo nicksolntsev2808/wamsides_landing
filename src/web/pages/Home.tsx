@@ -333,6 +333,81 @@ function Results() {
 
 
 
+/* ─── PORTFOLIO ─── */
+function Portfolio() {
+  const cases = [
+    {
+      title: "Daddy Smoke",
+      tag: "Інтернет-магазин",
+      desc: "Дизайн та розробка інтернет-магазину для українського виробника мангалів, грилів та BBQ обладнання",
+      image: "/portfolio/daddy-smoke-1.png",
+      image2: "/portfolio/daddy-smoke-2.png",
+    },
+    {
+      title: "Finik",
+      tag: "Інтернет-магазин",
+      desc: "Сучасний інтернет-магазин сухофруктів, горіхів та східних солодощів з mobile-first дизайном",
+      image: "/portfolio/finik-3.png",
+      image2: "/portfolio/finik-1.png",
+    },
+  ];
+
+  return (
+    <section style={{ background: "#FFFAF5", padding: "4.5rem 0" }}>
+      <div className="ws-container">
+        <div className="fade-up" style={{ marginBottom: "2rem" }}>
+          <span className="ws-tag">Наші роботи</span>
+          <div className="ws-divider"></div>
+          <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.5rem" }}>
+            Проєкти які ми реалізували
+          </h2>
+          <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "1rem", lineHeight: 1.75, margin: 0 }}>
+            Кожен сайт — окремий підхід під задачу клієнта
+          </p>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+          {cases.map((c, i) => (
+            <div key={i} className={`fade-up fade-up-delay-${i + 1}`} style={{ background: "#F0E6D3", borderRadius: "1.5rem", overflow: "hidden", border: "1px solid #E8D5C0" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "280px" }}>
+                {/* Left — image */}
+                <div style={{ position: "relative", overflow: "hidden", minHeight: "220px" }}>
+                  <img
+                    src={c.image}
+                    alt={c.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
+                </div>
+                {/* Right — info */}
+                <div style={{ padding: "2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                  <div>
+                    <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 700, color: "#C9603A", textTransform: "uppercase", letterSpacing: "0.08em", background: "rgba(201,96,58,0.1)", padding: "0.25rem 0.75rem", borderRadius: "2rem", display: "inline-block", marginBottom: "1rem" }}>
+                      {c.tag}
+                    </span>
+                    <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.5rem", color: "#4A2E1A", margin: "0 0 0.75rem" }}>
+                      {c.title}
+                    </h3>
+                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: "#5C3D2E", lineHeight: 1.7, margin: 0 }}>
+                      {c.desc}
+                    </p>
+                  </div>
+                  <button
+                    className="btn-primary"
+                    style={{ marginTop: "1.5rem", width: "fit-content", fontSize: "0.9rem", padding: "0.7rem 1.5rem" }}
+                    onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                  >
+                    Хочу такий сайт →
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── REVIEWS ─── */
 function Reviews() {
   const reviews = [
@@ -715,6 +790,7 @@ export default function Home() {
       <Hero />
       <Solution />
       <Results />
+      <Portfolio />
       <Reviews />
       <Contact />
       <Footer />
