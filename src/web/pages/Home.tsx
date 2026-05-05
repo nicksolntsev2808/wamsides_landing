@@ -269,8 +269,8 @@ function Solution() {
 function Results() {
   const items = [
     {
-      pain: "Є ідея для бізнесу, але немає сайту",
-      result: "Отримуєте готовий сайт під ключ за 4 тижні",
+      title: "Сайт під ключ за 4 тижні",
+      desc: "Від ідеї до готового результату — без зайвого клопоту",
       icon: (
         <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -278,8 +278,8 @@ function Results() {
       ),
     },
     {
-      pain: "Не знаєте з чого почати і скільки це коштує",
-      result: "Чіткий план, фіксована ціна — без сюрпризів",
+      title: "Фіксована ціна",
+      desc: "Чіткий план і вартість одразу — без сюрпризів",
       icon: (
         <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -287,8 +287,8 @@ function Results() {
       ),
     },
     {
-      pain: "Боїтесь витратити гроші і не отримати результат",
-      result: "Сайт готовий до реклами і налаштований на заявки",
+      title: "Готовність до реклами",
+      desc: "Сайт налаштований і готовий до запуску кампаній",
       icon: (
         <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -304,34 +304,25 @@ function Results() {
           <span className="ws-tag">Що ви отримаєте</span>
           <div className="ws-divider" style={{ margin: "1rem auto" }}></div>
           <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.75rem" }}>
-            Зробимо сайт який продає
+            Зробимо сайт який вирішує вашу задачу
           </h2>
           <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "1rem", maxWidth: "460px", lineHeight: 1.75, margin: "0 auto" }}>
             Беремо на себе все — від структури до запуску
           </p>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px", margin: "0 auto" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1.25rem" }}>
           {items.map((item, i) => (
-            <div key={i} className={`fade-up fade-up-delay-${i + 1}`} style={{ background: "#FFFAF5", borderRadius: "1.25rem", padding: "1.5rem", border: "1px solid #E8D5C0", display: "flex", gap: "1.25rem", alignItems: "flex-start" }}>
-              {/* Icon */}
-              <div style={{ width: "3rem", height: "3rem", borderRadius: "0.875rem", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center", color: "#FFFAF5", flexShrink: 0 }}>
+            <div key={i} className={`ws-card fade-up fade-up-delay-${i + 1}`} style={{ border: "1px solid #E8D5C0", textAlign: "center", padding: "2rem 1.5rem" }}>
+              <div style={{ width: "3.5rem", height: "3.5rem", borderRadius: "1rem", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center", color: "#FFFAF5", margin: "0 auto 1.25rem" }}>
                 {item.icon}
               </div>
-              {/* Content */}
-              <div style={{ flex: 1 }}>
-                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", margin: "0 0 0.4rem", lineHeight: 1.5 }}>
-                  {item.pain}
-                </p>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="3" style={{ flexShrink: 0 }}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.95rem", fontWeight: 700, color: "#4A2E1A", margin: 0, lineHeight: 1.5 }}>
-                    {item.result}
-                  </p>
-                </div>
-              </div>
+              <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 700, fontSize: "1.05rem", color: "#4A2E1A", margin: "0 0 0.5rem" }}>
+                {item.title}
+              </h3>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.875rem", color: "#9E7A65", margin: 0, lineHeight: 1.6 }}>
+                {item.desc}
+              </p>
             </div>
           ))}
         </div>
@@ -395,8 +386,14 @@ function Reviews() {
                 "{r.quote}"
               </p>
               <div style={{ borderTop: "1px solid #E8D5C0", paddingTop: "1rem", display: "flex", alignItems: "center", gap: "0.875rem" }}>
-                <div style={{ width: "2.75rem", height: "2.75rem", borderRadius: "50%", background: r.color, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <span style={{ fontFamily: "Raleway, sans-serif", fontWeight: 700, fontSize: "0.8rem", color: "#FFFAF5" }}>{r.initials}</span>
+                <div style={{ width: "2.75rem", height: "2.75rem", borderRadius: "50%", overflow: "hidden", flexShrink: 0, border: "2px solid #E8D5C0" }}>
+                  <img
+                    src={`https://api.dicebear.com/7.x/personas/svg?seed=${r.name}&backgroundColor=fde8d8,f5cba7,e8a87c`}
+                    alt={r.name}
+                    width="44"
+                    height="44"
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
                 </div>
                 <div>
                   <div style={{ fontFamily: "Raleway, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#4A2E1A" }}>{r.name}</div>
