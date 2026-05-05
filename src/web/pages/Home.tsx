@@ -187,10 +187,38 @@ function Hero() {
 /* ─── PROBLEM ─── */
 function Problem() {
   const problems = [
-    "Студії продають шаблонні рішення — однакові для всіх",
-    "Дизайн заради дизайну, без сенсів та аргументів",
-    "Лендинг не враховує контексту та особливостей ЦА",
-    "Немає аналізу результатів та поведінки відвідувачів",
+    {
+      text: "Студії продають шаблонні рішення — однакові для всіх",
+      icon: (
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+      ),
+    },
+    {
+      text: "Дизайн заради дизайну, без сенсів та аргументів",
+      icon: (
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      ),
+    },
+    {
+      text: "Сайт не враховує контексту та особливостей ЦА",
+      icon: (
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      ),
+    },
+    {
+      text: "Немає аналізу результатів та поведінки відвідувачів",
+      icon: (
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+        </svg>
+      ),
+    },
   ];
 
   return (
@@ -200,27 +228,25 @@ function Problem() {
           <span className="ws-tag">Проблема</span>
           <div className="ws-divider"></div>
           <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.75rem" }}>
-            Чому більшість лендингів не працює?
+            Чому більшість сайтів не працює?
           </h2>
           <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "1rem", maxWidth: "520px", lineHeight: 1.75 }}>
-            Часто бізнес вкладає гроші в рекламу, але лендинг не конвертує. Ось чому це відбувається.
+            Часто бізнес вкладає гроші в рекламу, але сайт не конвертує. Ось чому це відбувається.
           </p>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1.5rem" }}>
-          {problems.map((text, i) => (
+          {problems.map((item, i) => (
             <div
               key={i}
               className={`ws-card fade-up fade-up-delay-${i + 1}`}
               style={{ background: "#2C1A0E", border: "1px solid rgba(232,213,192,0.1)" }}
             >
-              <div style={{ width: "2.5rem", height: "2.5rem", borderRadius: "0.625rem", background: "rgba(201,96,58,0.15)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1rem" }}>
-                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+              <div style={{ width: "2.75rem", height: "2.75rem", borderRadius: "0.75rem", background: "rgba(201,96,58,0.15)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1rem" }}>
+                {item.icon}
               </div>
               <p style={{ fontFamily: "Nunito, sans-serif", color: "#F0E6D3", fontSize: "1rem", lineHeight: 1.65, margin: 0 }}>
-                {text}
+                {item.text}
               </p>
             </div>
           ))}
