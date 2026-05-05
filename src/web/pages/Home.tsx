@@ -117,9 +117,9 @@ function Hero() {
 
         {/* Headline */}
         <h1 className="fade-up fade-up-delay-1" style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(2.2rem, 5vw, 4.5rem)", lineHeight: 1.1, color: "#4A2E1A", maxWidth: "800px", marginBottom: "1.5rem" }}>
-          За 4 тижні запустимо сайт,{" "}
-          <span className="ws-gradient-text">який приводить заявки</span>,{" "}
-          а не зливає трафік
+          Створюємо сайти,{" "}
+          <span className="ws-gradient-text">які працюють</span>{" "}
+          на ваш бізнес
         </h1>
 
         {/* Sub */}
@@ -132,9 +132,7 @@ function Hero() {
           <button className="btn-primary" style={{ fontSize: "1.05rem", padding: "0.9rem 2rem" }} onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
             Дізнатися вартість →
           </button>
-          <button className="btn-outline" onClick={() => document.getElementById("solution")?.scrollIntoView({ behavior: "smooth" })}>
-            Наші послуги
-          </button>
+
         </div>
 
         {/* Social proof */}
@@ -351,16 +349,22 @@ function Reviews() {
       quote: "З Warmsides пропрацювали цільову аудиторію і структуру сторінки. Це кардинально вплинуло на якість заявок.",
       name: "Наталія Сотніченко",
       role: "Співвласниця школи англійської NaEasy",
+      initials: "НС",
+      color: "#C9603A",
     },
     {
       quote: "Запустили інтернет-магазин із чітким планом. Зручна адмінка, детальна статистика. Продовжуємо розвивати магазин. 🔥",
       name: "Андрій Савченко",
       role: "Маркетинговий директор Vapors",
+      initials: "АС",
+      color: "#8B6347",
     },
     {
       quote: "Warmsides запропонували прості рішення, які зробили продукт зручнішим і логічнішим для користувачів.",
       name: "Євген Костін",
       role: "CEO Freudika",
+      initials: "ЄК",
+      color: "#5C3D2E",
     },
 
   ];
@@ -390,9 +394,14 @@ function Reviews() {
               <p style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "0.9rem", lineHeight: 1.7, flex: 1, marginBottom: "1.5rem" }}>
                 "{r.quote}"
               </p>
-              <div style={{ borderTop: "1px solid #E8D5C0", paddingTop: "1rem" }}>
-                <div style={{ fontFamily: "Raleway, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#4A2E1A" }}>{r.name}</div>
-                <div style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "#9E7A65", marginTop: "0.2rem" }}>{r.role}</div>
+              <div style={{ borderTop: "1px solid #E8D5C0", paddingTop: "1rem", display: "flex", alignItems: "center", gap: "0.875rem" }}>
+                <div style={{ width: "2.75rem", height: "2.75rem", borderRadius: "50%", background: r.color, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <span style={{ fontFamily: "Raleway, sans-serif", fontWeight: 700, fontSize: "0.8rem", color: "#FFFAF5" }}>{r.initials}</span>
+                </div>
+                <div>
+                  <div style={{ fontFamily: "Raleway, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#4A2E1A" }}>{r.name}</div>
+                  <div style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "#9E7A65", marginTop: "0.2rem" }}>{r.role}</div>
+                </div>
               </div>
             </div>
           ))}
@@ -561,7 +570,7 @@ function Contact() {
                 </div>
 
                 <div>
-                  <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Телефон або email *</label>
+                  <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Телефон *</label>
                   <input
                     className="ws-input"
                     type="text"
