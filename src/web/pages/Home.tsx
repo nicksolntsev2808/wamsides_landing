@@ -334,21 +334,83 @@ function Results() {
 
 
 /* ─── PORTFOLIO ─── */
+function PortfolioCard({ title, tag, desc, images }: { title: string; tag: string; desc: string; images: string[] }) {
+  const [active, setActive] = useState(0);
+  return (
+    <div className="ws-card fade-up" style={{ padding: 0, overflow: "hidden", border: "1px solid #E8D5C0" }}>
+      {/* Image slider */}
+      <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", background: "#2C1A0E" }}>
+        <img
+          src={images[active]}
+          alt={title}
+          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "opacity 0.3s" }}
+        />
+        {/* Dot indicators */}
+        {images.length > 1 && (
+          <div style={{ position: "absolute", bottom: "0.75rem", left: "50%", transform: "translateX(-50%)", display: "flex", gap: "0.4rem" }}>
+            {images.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                style={{ width: active === i ? "1.5rem" : "0.5rem", height: "0.5rem", borderRadius: "1rem", background: active === i ? "#C9603A" : "rgba(255,250,245,0.6)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.2s" }}
+              />
+            ))}
+          </div>
+        )}
+        {/* Prev/Next arrows */}
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={() => setActive(i => (i - 1 + images.length) % images.length)}
+              style={{ position: "absolute", left: "0.75rem", top: "50%", transform: "translateY(-50%)", width: "2rem", height: "2rem", borderRadius: "50%", background: "rgba(255,250,245,0.85)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
+            >
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#4A2E1A" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button
+              onClick={() => setActive(i => (i + 1) % images.length)}
+              style={{ position: "absolute", right: "0.75rem", top: "50%", transform: "translateY(-50%)", width: "2rem", height: "2rem", borderRadius: "50%", background: "rgba(255,250,245,0.85)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
+            >
+              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#4A2E1A" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </button>
+          </>
+        )}
+      </div>
+      {/* Info */}
+      <div style={{ padding: "1.5rem" }}>
+        <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 700, color: "#C9603A", textTransform: "uppercase", letterSpacing: "0.08em", background: "rgba(201,96,58,0.1)", padding: "0.25rem 0.75rem", borderRadius: "2rem", display: "inline-block", marginBottom: "0.75rem" }}>
+          {tag}
+        </span>
+        <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.25rem", color: "#4A2E1A", margin: "0 0 0.5rem" }}>
+          {title}
+        </h3>
+        <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.875rem", color: "#5C3D2E", lineHeight: 1.65, margin: "0 0 1.25rem" }}>
+          {desc}
+        </p>
+        <button
+          className="btn-primary"
+          style={{ width: "100%", textAlign: "center", fontSize: "0.9rem", padding: "0.75rem" }}
+          onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+        >
+          Хочу такий сайт →
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function Portfolio() {
   const cases = [
     {
       title: "Daddy Smoke",
       tag: "Інтернет-магазин",
       desc: "Дизайн та розробка інтернет-магазину для українського виробника мангалів, грилів та BBQ обладнання",
-      image: "/portfolio/daddy-smoke-1.png",
-      image2: "/portfolio/daddy-smoke-2.png",
+      images: ["/portfolio/daddy-smoke-1.png", "/portfolio/daddy-smoke-2.png"],
     },
     {
       title: "Finik",
       tag: "Інтернет-магазин",
       desc: "Сучасний інтернет-магазин сухофруктів, горіхів та східних солодощів з mobile-first дизайном",
-      image: "/portfolio/finik-3.png",
-      image2: "/portfolio/finik-1.png",
+      images: ["/portfolio/finik-3.png", "/portfolio/finik-1.png", "/portfolio/finik-2.png"],
     },
   ];
 
@@ -365,42 +427,9 @@ function Portfolio() {
             Кожен сайт — окремий підхід під задачу клієнта
           </p>
         </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
           {cases.map((c, i) => (
-            <div key={i} className={`fade-up fade-up-delay-${i + 1}`} style={{ background: "#F0E6D3", borderRadius: "1.5rem", overflow: "hidden", border: "1px solid #E8D5C0" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "280px" }}>
-                {/* Left — image */}
-                <div style={{ position: "relative", overflow: "hidden", minHeight: "220px" }}>
-                  <img
-                    src={c.image}
-                    alt={c.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                  />
-                </div>
-                {/* Right — info */}
-                <div style={{ padding: "2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                  <div>
-                    <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 700, color: "#C9603A", textTransform: "uppercase", letterSpacing: "0.08em", background: "rgba(201,96,58,0.1)", padding: "0.25rem 0.75rem", borderRadius: "2rem", display: "inline-block", marginBottom: "1rem" }}>
-                      {c.tag}
-                    </span>
-                    <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.5rem", color: "#4A2E1A", margin: "0 0 0.75rem" }}>
-                      {c.title}
-                    </h3>
-                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: "#5C3D2E", lineHeight: 1.7, margin: 0 }}>
-                      {c.desc}
-                    </p>
-                  </div>
-                  <button
-                    className="btn-primary"
-                    style={{ marginTop: "1.5rem", width: "fit-content", fontSize: "0.9rem", padding: "0.7rem 1.5rem" }}
-                    onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-                  >
-                    Хочу такий сайт →
-                  </button>
-                </div>
-              </div>
-            </div>
+            <PortfolioCard key={i} {...c} />
           ))}
         </div>
       </div>
