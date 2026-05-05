@@ -287,16 +287,31 @@ function Solution() {
 function Results() {
   const items = [
     {
-      before: "Сайт є, але заявок немає",
-      after: "Сайт який стабільно приводить клієнтів",
+      pain: "Є ідея для бізнесу, але немає сайту",
+      result: "Отримуєте готовий сайт під ключ за 4 тижні",
+      icon: (
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      ),
     },
     {
-      before: "Реклама зливає бюджет без результату",
-      after: "Готовність до реклами одразу після запуску",
+      pain: "Не знаєте з чого почати і скільки це коштує",
+      result: "Чіткий план, фіксована ціна — без сюрпризів",
+      icon: (
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+      ),
     },
     {
-      before: "Не розумієте чому відвідувачі йдуть",
-      after: "Аналітика і розуміння як покращувати результат",
+      pain: "Боїтесь витратити гроші і не отримати результат",
+      result: "Сайт готовий до реклами і налаштований на заявки",
+      icon: (
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      ),
     },
   ];
 
@@ -304,43 +319,36 @@ function Results() {
     <section style={{ background: "#F0E6D3", padding: "6rem 0" }}>
       <div className="ws-container">
         <div className="fade-up" style={{ marginBottom: "3rem", textAlign: "center" }}>
-          <span className="ws-tag">Результат</span>
+          <span className="ws-tag">Що ви отримаєте</span>
           <div className="ws-divider" style={{ margin: "1rem auto" }}></div>
           <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.75rem" }}>
-            Що змінюється після роботи з нами
+            Є ідея — зробимо сайт який продає
           </h2>
+          <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "1rem", maxWidth: "460px", lineHeight: 1.75, margin: "0 auto" }}>
+            Беремо на себе все — від структури до запуску
+          </p>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "720px", margin: "0 auto" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "680px", margin: "0 auto" }}>
           {items.map((item, i) => (
-            <div key={i} className={`fade-up fade-up-delay-${i + 1}`} style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: "0.75rem", alignItems: "center", background: "#FFFAF5", borderRadius: "1rem", padding: "1.25rem 1.5rem", border: "1px solid #E8D5C0" }}>
-              {/* Before */}
-              <div style={{ display: "flex", alignItems: "center", gap: "0.625rem" }}>
-                <div style={{ width: "1.75rem", height: "1.75rem", borderRadius: "50%", background: "rgba(201,96,58,0.1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="3">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </div>
-                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.875rem", color: "#9E7A65", margin: 0, lineHeight: 1.5 }}>{item.before}</p>
+            <div key={i} className={`fade-up fade-up-delay-${i + 1}`} style={{ background: "#FFFAF5", borderRadius: "1.25rem", padding: "1.5rem", border: "1px solid #E8D5C0", display: "flex", gap: "1.25rem", alignItems: "flex-start" }}>
+              {/* Icon */}
+              <div style={{ width: "3rem", height: "3rem", borderRadius: "0.875rem", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center", color: "#FFFAF5", flexShrink: 0 }}>
+                {item.icon}
               </div>
-
-              {/* Arrow */}
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <div style={{ width: "2rem", height: "2rem", borderRadius: "50%", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#FFFAF5" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              {/* Content */}
+              <div style={{ flex: 1 }}>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", margin: "0 0 0.4rem", lineHeight: 1.5 }}>
+                  {item.pain}
+                </p>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="3" style={{ flexShrink: 0 }}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.95rem", fontWeight: 700, color: "#4A2E1A", margin: 0, lineHeight: 1.5 }}>
+                    {item.result}
+                  </p>
                 </div>
-              </div>
-
-              {/* After */}
-              <div style={{ display: "flex", alignItems: "center", gap: "0.625rem" }}>
-                <div style={{ width: "1.75rem", height: "1.75rem", borderRadius: "50%", background: "rgba(201,96,58,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="3">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.875rem", fontWeight: 600, color: "#4A2E1A", margin: 0, lineHeight: 1.5 }}>{item.after}</p>
               </div>
             </div>
           ))}
