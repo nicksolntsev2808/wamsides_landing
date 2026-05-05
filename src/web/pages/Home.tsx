@@ -110,8 +110,9 @@ function Hero() {
       <div className="ws-container" style={{ position: "relative", zIndex: 1 }}>
         {/* Badges */}
         <div className="fade-up" style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", marginBottom: "2rem" }}>
-          <span className="ws-tag">UX-орієнтована структура</span>
-          <span className="ws-tag">Готовність до реклами за 4 тижні</span>
+          <span className="ws-tag">Сайт під ключ</span>
+          <span className="ws-tag">Фіксована ціна</span>
+          <span className="ws-tag">Готовність до реклами</span>
         </div>
 
         {/* Headline */}
@@ -123,7 +124,7 @@ function Hero() {
 
         {/* Sub */}
         <p className="fade-up fade-up-delay-2" style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.15rem", color: "#5C3D2E", maxWidth: "560px", lineHeight: 1.75, marginBottom: "2.5rem" }}>
-          Розробляємо сайти під ключ — від дизайну до запуску. Готовність до реклами за 4 тижні.
+          Розробляємо сайти під ключ — від дизайну до запуску.
         </p>
 
         {/* CTAs */}
@@ -496,12 +497,105 @@ function Contact() {
     <SectionTracker eventName="scroll_to_form" />
     <section id="contact" style={{ background: "#FFFAF5", padding: "4.5rem 0" }}>
       <div className="ws-container">
-        <div className="ws-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "start" }}>
-          {/* Left — Form */}
-          <div className="fade-up fade-up-delay-1" style={{ order: 1 }}>
-            <div ref={formRef} className="ws-card" style={{ padding: "2.5rem" }}>
 
-            <div className="fade-up fade-up-delay-1" style={{ display: "flex", flexDirection: "column", gap: "1rem", marginBottom: "2.5rem" }}>
+        {/* Heading */}
+        <div className="fade-up" style={{ marginBottom: "2rem", textAlign: "center" }}>
+          <span className="ws-tag">Контакт</span>
+          <div className="ws-divider" style={{ margin: "1rem auto" }}></div>
+          <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.4rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.5rem", lineHeight: 1.2 }}>
+            Отримайте план і вартість безкоштовно
+          </h2>
+        </div>
+
+        <div className="ws-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", alignItems: "start" }}>
+
+          {/* Left — Form */}
+          <div ref={formRef} className="fade-up ws-card" style={{ padding: "2.5rem" }}>
+            {sent ? (
+              <div style={{ textAlign: "center", padding: "2.5rem 1rem" }}>
+                <div style={{ width: "5rem", height: "5rem", borderRadius: "50%", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.75rem", boxShadow: "0 8px 24px rgba(201,96,58,0.3)" }}>
+                  <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#FFFAF5" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.75rem", color: "#4A2E1A", marginBottom: "0.75rem" }}>Дякуємо за заявку!</h3>
+                <p style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "1rem", lineHeight: 1.6, marginBottom: "1.5rem" }}>
+                  Менеджер Вікторія зв'яжеться з вами<br />протягом 1–2 годин у робочий час.
+                </p>
+                <div style={{ background: "#FFF3ED", borderRadius: "0.75rem", padding: "1rem 1.25rem", marginBottom: "1.75rem" }}>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: "#9E7A65", margin: 0 }}>
+                    Якщо терміново — напишіть нам одразу у Telegram
+                  </p>
+                  <a href="https://t.me/NS940828" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#C9603A", textDecoration: "none" }}>
+                    @NS940828
+                  </a>
+                </div>
+                <a href="/" style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", textDecoration: "underline" }}>
+                  Повернутися на головну
+                </a>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                name="contact"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
+              >
+                <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="bot-field" />
+
+                <div style={{ marginBottom: "0.25rem" }}>
+                  <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.4rem", color: "#4A2E1A", margin: "0 0 0.25rem" }}>Залишити заявку</h3>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", margin: 0 }}>Розрахуємо вартість і розповімо про етапи запуску</p>
+                </div>
+
+                <div>
+                  <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Ваше ім'я *</label>
+                  <input
+                    className="ws-input"
+                    type="text"
+                    name="name"
+                    placeholder="Іван Іваненко"
+                    autoComplete="name"
+                    value={form.name}
+                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Телефон або email *</label>
+                  <input
+                    className="ws-input"
+                    type="text"
+                    name="phone"
+                    placeholder="+380 50 123-45-67 або hello@example.com"
+                    autoComplete="tel"
+                    value={form.phone}
+                    onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
+                    required
+                  />
+                </div>
+
+                {error && (
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#C9603A", margin: 0, textAlign: "center" }}>
+                    Помилка відправки. Спробуйте ще раз або напишіть на hello@warmsides.com
+                  </p>
+                )}
+                <button type="submit" className="btn-primary" style={{ width: "100%", textAlign: "center", marginTop: "0.25rem" }}>
+                  Дізнатися вартість
+                </button>
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "#9E7A65", textAlign: "center", margin: 0 }}>
+                  Менеджер Вікторія · Зазвичай відповідаємо за 1–2 год
+                </p>
+              </form>
+            )}
+          </div>
+
+          {/* Right — value props */}
+          <div className="fade-up fade-up-delay-1">
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem", marginBottom: "2rem" }}>
               {[
                 {
                   icon: (
@@ -544,7 +638,7 @@ function Contact() {
             </div>
 
             {/* Contact info */}
-            <div className="fade-up fade-up-delay-2" style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", paddingTop: "1.5rem", borderTop: "1px solid #E8D5C0" }}>
               {[
                 { icon: "📍", text: "Київ, Харків · Амстердам" },
                 { icon: "📞", text: "+380 67 531 19 52" },
@@ -558,105 +652,13 @@ function Contact() {
             </div>
           </div>
 
-          {/* Right — value props */}
-          <div className="fade-up fade-up-delay-2" style={{ order: 2 }}>
-            <div className="fade-up">
-              <span className="ws-tag">Контакт</span>
-              <div className="ws-divider"></div>
-              <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.4rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "2rem", lineHeight: 1.2 }}>
-                Отримайте план і вартість безкоштовно
-              </h2>
-            </div>
-            <div ref={formRef} className="ws-card" style={{ padding: "2.5rem" }}>
-              {sent ? (
-                <div style={{ textAlign: "center", padding: "2.5rem 1rem" }}>
-                  <div style={{ width: "5rem", height: "5rem", borderRadius: "50%", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.75rem", boxShadow: "0 8px 24px rgba(201,96,58,0.3)" }}>
-                    <svg width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#FFFAF5" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.75rem", color: "#4A2E1A", marginBottom: "0.75rem" }}>Дякуємо за заявку!</h3>
-                  <p style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "1rem", lineHeight: 1.6, marginBottom: "1.5rem" }}>
-                    Менеджер Вікторія зв'яжеться з вами<br />протягом 1–2 годин у робочий час.
-                  </p>
-                  <div style={{ background: "#FFF3ED", borderRadius: "0.75rem", padding: "1rem 1.25rem", marginBottom: "1.75rem" }}>
-                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: "#9E7A65", margin: 0 }}>
-                      Якщо терміново — напишіть нам одразу у Telegram
-                    </p>
-                    <a href="https://t.me/NS940828" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#C9603A", textDecoration: "none" }}>
-                      @NS940828
-                    </a>
-                  </div>
-                  <a href="/" style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", textDecoration: "underline" }}>
-                    Повернутися на головну
-                  </a>
-                </div>
-              ) : (
-                <form
-                  onSubmit={handleSubmit}
-                  name="contact"
-                  data-netlify="true"
-                  netlify-honeypot="bot-field"
-                  style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
-                >
-                  <input type="hidden" name="form-name" value="contact" />
-                  <input type="hidden" name="bot-field" />
-
-                  <div style={{ marginBottom: "0.25rem" }}>
-                    <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.4rem", color: "#4A2E1A", margin: "0 0 0.25rem" }}>Дізнайтеся вартість вашого сайту</h3>
-                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", margin: 0 }}>Розрахуємо вартість і розповімо про етапи запуску</p>
-                  </div>
-
-                  <div>
-                    <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Ваше ім'я *</label>
-                    <input
-                      className="ws-input"
-                      type="text"
-                      name="name"
-                      placeholder="Іван Іваненко"
-                      autoComplete="name"
-                      value={form.name}
-                      onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Телефон або email *</label>
-                    <input
-                      className="ws-input"
-                      type="text"
-                      name="phone"
-                      placeholder="+380 50 123-45-67 або hello@example.com"
-                      autoComplete="tel"
-                      value={form.phone}
-                      onChange={e => setForm(f => ({ ...f, phone: e.target.value }))}
-                      required
-                    />
-                  </div>
-
-                  {error && (
-                    <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#C9603A", margin: 0, textAlign: "center" }}>
-                      Помилка відправки. Спробуйте ще раз або напишіть на hello@warmsides.com
-                    </p>
-                  )}
-                  <button type="submit" className="btn-primary" style={{ width: "100%", textAlign: "center", marginTop: "0.25rem" }}>
-                    Дізнатися вартість
-                  </button>
-                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "#9E7A65", textAlign: "center", margin: 0 }}>
-                    Менеджер Вікторія · Зазвичай відповідаємо за 1–2 год
-                  </p>
-                </form>
-              )}
-            </div>
-          </div>
-          </div>
         </div>
       </div>
     </section>
     </>
   );
 }
+
 
 /* ─── FOOTER ─── */
 function Footer() {
