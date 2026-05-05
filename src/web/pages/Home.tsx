@@ -96,7 +96,7 @@ function Nav() {
 /* ─── HERO ─── */
 function Hero() {
   return (
-    <section id="hero" style={{ background: "#FFFAF5", padding: "6rem 0 5rem", position: "relative", overflow: "hidden", maxWidth: "100%" }}>
+    <section id="hero" style={{ background: "#FFFAF5", padding: "5rem 0 3rem", position: "relative", overflow: "hidden", maxWidth: "100%" }}>
       {/* Decorative blob — clipped to section */}
       <div
         className="ws-blob"
@@ -131,12 +131,12 @@ function Hero() {
           <button className="btn-primary" style={{ fontSize: "1.05rem", padding: "0.9rem 2rem" }} onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
             Дізнатися вартість →
           </button>
-          <button className="btn-outline" onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}>
+          <button className="btn-outline" onClick={() => document.getElementById("solution")?.scrollIntoView({ behavior: "smooth" })}>
             Наші послуги
           </button>
         </div>
 
-        {/* Avatars + social proof */}
+        {/* Social proof */}
         <div className="fade-up fade-up-delay-4" style={{ marginTop: "1.75rem", display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
             {[
@@ -160,23 +160,6 @@ function Hero() {
             <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "#5C3D2E" }}>
               <strong>100+ підприємців</strong> вже обрали нас
             </span>
-          </div>
-        </div>
-
-        {/* Social proof */}
-        <div className="fade-up fade-up-delay-4" style={{ marginTop: "2rem", display: "flex", alignItems: "center", gap: "1.5rem", flexWrap: "wrap" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <div style={{ width: "2rem", height: "2rem", borderRadius: "50%", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#FFFAF5" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-            </div>
-            <span style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#4A2E1A" }}>100+ проєктів</span>
-          </div>
-          <div style={{ width: "1px", height: "1.25rem", background: "#E8D5C0" }}></div>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-            <div style={{ width: "2rem", height: "2rem", borderRadius: "50%", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#FFFAF5" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-            </div>
-            <span style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#4A2E1A" }}>4 тижні</span>
           </div>
         </div>
       </div>
@@ -231,9 +214,9 @@ function Solution() {
   ];
 
   return (
-    <section id="solution" style={{ background: "#FFFAF5", padding: "6rem 0" }}>
+    <section id="solution" style={{ background: "#FFFAF5", padding: "4.5rem 0" }}>
       <div className="ws-container">
-        <div className="fade-up" style={{ marginBottom: "3rem", textAlign: "center" }}>
+        <div className="fade-up" style={{ marginBottom: "2rem", textAlign: "center" }}>
           <span className="ws-tag">Як ми працюємо</span>
           <div className="ws-divider" style={{ margin: "1rem auto" }}></div>
           <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.75rem" }}>
@@ -244,7 +227,7 @@ function Solution() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.5rem", marginBottom: "3rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.5rem", marginBottom: "2rem" }}>
           {steps.map((step, i) => (
             <div key={i} className={`fade-up fade-up-delay-${i + 1}`} style={{ position: "relative" }}>
               <div className="ws-card" style={{ height: "100%", border: "1px solid #E8D5C0", padding: "2rem 1.75rem" }}>
@@ -316,9 +299,9 @@ function Results() {
   ];
 
   return (
-    <section style={{ background: "#F0E6D3", padding: "6rem 0" }}>
+    <section style={{ background: "#F0E6D3", padding: "4.5rem 0" }}>
       <div className="ws-container">
-        <div className="fade-up" style={{ marginBottom: "3rem", textAlign: "center" }}>
+        <div className="fade-up" style={{ marginBottom: "2rem", textAlign: "center" }}>
           <span className="ws-tag">Що ви отримаєте</span>
           <div className="ws-divider" style={{ margin: "1rem auto" }}></div>
           <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.75rem" }}>
@@ -386,9 +369,9 @@ function Reviews() {
   ];
 
   return (
-    <section id="reviews" style={{ background: "#F0E6D3", padding: "6rem 0" }}>
+    <section id="reviews" style={{ background: "#F0E6D3", padding: "4.5rem 0" }}>
       <div className="ws-container">
-        <div className="fade-up" style={{ marginBottom: "3rem" }}>
+        <div className="fade-up" style={{ marginBottom: "2rem" }}>
           <span className="ws-tag">Відгуки клієнтів</span>
           <div className="ws-divider"></div>
           <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0 }}>
@@ -511,21 +494,12 @@ function Contact() {
   return (
     <>
     <SectionTracker eventName="scroll_to_form" />
-    <section id="contact" style={{ background: "#FFFAF5", padding: "6rem 0" }}>
+    <section id="contact" style={{ background: "#FFFAF5", padding: "4.5rem 0" }}>
       <div className="ws-container">
         <div className="ws-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "start" }}>
-          {/* Left */}
-          <div>
-            <div className="fade-up">
-              <span className="ws-tag">Контакт</span>
-              <div className="ws-divider"></div>
-              <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.4rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.75rem", lineHeight: 1.2 }}>
-                Отримайте план і вартість безкоштовно
-              </h2>
-              <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "1rem", lineHeight: 1.75, marginBottom: "2rem" }}>
-                Залиште контакт — і ми зробимо все інше
-              </p>
-            </div>
+          {/* Left — Form */}
+          <div className="fade-up fade-up-delay-1" style={{ order: 1 }}>
+            <div ref={formRef} className="ws-card" style={{ padding: "2.5rem" }}>
 
             <div className="fade-up fade-up-delay-1" style={{ display: "flex", flexDirection: "column", gap: "1rem", marginBottom: "2.5rem" }}>
               {[
@@ -584,8 +558,15 @@ function Contact() {
             </div>
           </div>
 
-          {/* Right — form */}
-          <div className="fade-up fade-up-delay-1">
+          {/* Right — value props */}
+          <div className="fade-up fade-up-delay-2" style={{ order: 2 }}>
+            <div className="fade-up">
+              <span className="ws-tag">Контакт</span>
+              <div className="ws-divider"></div>
+              <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3vw, 2.4rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "2rem", lineHeight: 1.2 }}>
+                Отримайте план і вартість безкоштовно
+              </h2>
+            </div>
             <div ref={formRef} className="ws-card" style={{ padding: "2.5rem" }}>
               {sent ? (
                 <div style={{ textAlign: "center", padding: "2.5rem 1rem" }}>
@@ -668,6 +649,7 @@ function Contact() {
                 </form>
               )}
             </div>
+          </div>
           </div>
         </div>
       </div>
