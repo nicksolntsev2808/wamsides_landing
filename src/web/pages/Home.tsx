@@ -342,13 +342,15 @@ function Reviews() {
       role: "Співвласниця школи англійської NaEasy",
       initials: "НС",
       color: "#C9603A",
+      photo: "/avatars/natalia.jpg",
     },
     {
       quote: "Запустили інтернет-магазин із чітким планом. Зручна адмінка, детальна статистика. Продовжуємо розвивати магазин. 🔥",
-      name: "Андрій Савченко",
+      name: "Анна Савченко",
       role: "Маркетинговий директор Vapors",
       initials: "АС",
       color: "#8B6347",
+      photo: "/avatars/andriy.jpg",
     },
     {
       quote: "Warmsides запропонували прості рішення, які зробили продукт зручнішим і логічнішим для користувачів.",
@@ -356,6 +358,7 @@ function Reviews() {
       role: "CEO Freudika",
       initials: "ЄК",
       color: "#5C3D2E",
+      photo: "/avatars/evgen.jpg",
     },
 
   ];
@@ -388,7 +391,7 @@ function Reviews() {
               <div style={{ borderTop: "1px solid #E8D5C0", paddingTop: "1rem", display: "flex", alignItems: "center", gap: "0.875rem" }}>
                 <div style={{ width: "2.75rem", height: "2.75rem", borderRadius: "50%", overflow: "hidden", flexShrink: 0, border: "2px solid #E8D5C0" }}>
                   <img
-                    src={`https://api.dicebear.com/7.x/personas/svg?seed=${r.name}&backgroundColor=fde8d8,f5cba7,e8a87c`}
+                    src={r.photo}
                     alt={r.name}
                     width="44"
                     height="44"
