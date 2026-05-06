@@ -370,7 +370,7 @@ function PortfolioCard({ title, tag, desc, images }: { title: string; tag: strin
               alt={title}
               style={{
                 position: "absolute", inset: 0, width: "100%", height: "100%",
-                objectFit: "cover", objectPosition: "top",
+                objectFit: "cover", objectPosition: "center top",
                 opacity: i === slide ? 1 : 0,
                 transition: "opacity 0.6s ease",
               }}
@@ -434,7 +434,7 @@ function Portfolio() {
   ];
 
   return (
-    <section style={{ background: "#FFFAF5", padding: "4.5rem 0" }}>
+    <section style={{ background: "#FFFAF5", padding: "4.5rem 0", overflow: "hidden" }}>
       <div className="ws-container">
         <div className="fade-up" style={{ marginBottom: "2rem", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem" }}>
           <div>
@@ -465,7 +465,7 @@ function Portfolio() {
 
         {/* Carousel */}
         <div
-          style={{ overflow: "hidden", margin: "0 -1rem", padding: "0 1rem" }}
+          style={{ overflow: "visible", marginRight: "-2rem" }}
           onTouchStart={e => { startX.current = e.touches[0].clientX; }}
           onTouchEnd={e => {
             const diff = startX.current - e.changedTouches[0].clientX;
@@ -473,9 +473,9 @@ function Portfolio() {
             else if (diff < -50) setActive(i => Math.max(i - 1, 0));
           }}
         >
-          <div style={{ display: "flex", transition: "transform 0.4s cubic-bezier(0.4,0,0.2,1)", transform: `translateX(calc(-${active * 85}% - ${active * 1}rem))`, gap: "1rem" }}>
+          <div style={{ display: "flex", transition: "transform 0.4s cubic-bezier(0.4,0,0.2,1)", transform: `translateX(calc(-${active * 78}% - ${active * 0.75}rem))`, gap: "0.75rem" }}>
             {cases.map((c, i) => (
-              <div key={i} style={{ minWidth: "82%", flexShrink: 0, opacity: i === active ? 1 : 0.5, transform: i === active ? "scale(1)" : "scale(0.97)", transition: "all 0.4s" }}>
+              <div key={i} style={{ minWidth: "75%", flexShrink: 0, opacity: i === active ? 1 : 0.45, transform: i === active ? "scale(1)" : "scale(0.96)", transition: "all 0.4s", pointerEvents: i === active ? "auto" : "none" }}>
                 <PortfolioCard {...c} />
               </div>
             ))}
