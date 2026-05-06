@@ -417,8 +417,6 @@ function PortfolioCard({ title, tag, desc, images }: { title: string; tag: strin
 function Portfolio() {
   const [active, setActive] = useState(0);
   const startX = useRef(0);
-  const [dragging, setDragging] = useState(false);
-  const [dragDelta, setDragDelta] = useState(0);
 
   const cases = [
     {
@@ -441,20 +439,10 @@ function Portfolio() {
     },
   ];
 
-  const goNext = () => setActive(i => Math.min(i + 1, cases.length - 1));
-  const goPrev = () => setActive(i => Math.max(i - 1, 0));
-
-  // Cards behind active — peeking from the right-bottom
-  const STACK_OFFSET_X = 14; // px per layer shift right
-  const STACK_OFFSET_Y = 10; // px per layer shift down
-  const STACK_ROTATE  =  2; // deg per layer tilt
-
   return (
     <section style={{ background: "#FFFAF5", padding: "4.5rem 0", overflow: "hidden" }}>
       <div className="ws-container">
-
-        {/* Header */}
-        <div className="fade-up" style={{ marginBottom: "2.5rem", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem" }}>
+        <div className="fade-up" style={{ marginBottom: "2rem", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem" }}>
           <div>
             <span className="ws-tag">Наші роботи</span>
             <div className="ws-divider"></div>
@@ -467,113 +455,64 @@ function Portfolio() {
           </div>
           <div style={{ display: "flex", gap: "0.5rem", flexShrink: 0, marginTop: "0.5rem" }}>
             <button
-              onClick={goPrev}
-              disabled={active === 0}
-              style={{ width: "2.5rem", height: "2.5rem", borderRadius: "50%", border: "1px solid #E8D5C0", background: active === 0 ? "#F0E6D3" : "#FFFAF5", cursor: active === 0 ? "default" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s" }}
+              onClick={() => setActive(i => (i - 1 + cases.length) % cases.length)}
+              style={{ width: "2.5rem", height: "2.5rem", borderRadius: "50%", border: "1px solid #E8D5C0", background: "#FFFAF5", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
             >
-              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke={active === 0 ? "#C9B8A8" : "#4A2E1A"} strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="#4A2E1A" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
             </button>
             <button
-              onClick={goNext}
-              disabled={active === cases.length - 1}
-              style={{ width: "2.5rem", height: "2.5rem", borderRadius: "50%", border: "none", background: active === cases.length - 1 ? "#F0E6D3" : "#C9603A", cursor: active === cases.length - 1 ? "default" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s" }}
+              onClick={() => setActive(i => (i + 1) % cases.length)}
+              style={{ width: "2.5rem", height: "2.5rem", borderRadius: "50%", border: "none", background: "#C9603A", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
             >
-              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke={active === cases.length - 1 ? "#C9B8A8" : "#FFFAF5"} strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="#FFFAF5" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
             </button>
           </div>
         </div>
 
-        {/* Deck */}
+        {/* Stacked cards */}
         <div
-          style={{
-            position: "relative",
-            // Extra right padding so peeking cards are visible
-            paddingRight: `${(cases.length - 1) * STACK_OFFSET_X + 20}px`,
-            paddingBottom: `${(cases.length - 1) * STACK_OFFSET_Y + 16}px`,
-            touchAction: "pan-y",
-            userSelect: "none",
-          }}
-          onTouchStart={e => {
-            startX.current = e.touches[0].clientX;
-            setDragging(true);
-            setDragDelta(0);
-          }}
-          onTouchMove={e => {
-            setDragDelta(e.touches[0].clientX - startX.current);
-          }}
-          onTouchEnd={() => {
-            if (dragDelta < -40) goNext();
-            else if (dragDelta > 40) goPrev();
-            setDragging(false);
-            setDragDelta(0);
+          style={{ position: "relative", paddingBottom: "3rem", touchAction: "pan-y" }}
+          onTouchStart={e => { startX.current = e.touches[0].clientX; }}
+          onTouchEnd={e => {
+            const diff = startX.current - e.changedTouches[0].clientX;
+            if (diff > 40) setActive(i => (i + 1) % cases.length);
+            else if (diff < -40) setActive(i => (i - 1 + cases.length) % cases.length);
           }}
         >
-          {/* Render all cards: active on top, rest peeking behind-right */}
-          {cases.map((c, i) => {
-            const isActive = i === active;
-            // Cards before active are hidden; cards after active peek
-            const stackIndex = i - active; // 0 = active, 1 = next, 2 = further
-            if (stackIndex < 0) return null; // already passed — hide
-
-            const zIndex = cases.length - stackIndex;
-            const translateX = isActive
-              ? dragging ? dragDelta * 0.3 : 0
-              : stackIndex * STACK_OFFSET_X;
-            const translateY = isActive ? 0 : stackIndex * STACK_OFFSET_Y;
-            const rotate = isActive
-              ? dragging ? dragDelta * 0.03 : 0
-              : stackIndex * STACK_ROTATE;
-            const opacity = stackIndex > 2 ? 0 : 1;
-            const scale = isActive ? 1 : Math.max(0.97 - stackIndex * 0.015, 0.94);
-
+          {/* Background cards — visible stack */}
+          {cases.slice(active + 1).reverse().map((c, ri) => {
+            const offset = cases.length - active - 1 - ri;
             return (
               <div
-                key={c.title}
+                key={`bg-${active + 1 + ri}`}
                 style={{
-                  position: isActive ? "relative" : "absolute",
-                  top: isActive ? undefined : 0,
-                  left: isActive ? undefined : 0,
-                  right: isActive ? undefined : 0,
-                  width: isActive ? "100%" : undefined,
-                  maxWidth: "420px",
-                  zIndex,
-                  opacity,
-                  transform: `translate(${translateX}px, ${translateY}px) rotate(${rotate}deg) scale(${scale})`,
-                  transition: dragging ? "none" : "transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s",
-                  transformOrigin: "bottom left",
-                  cursor: isActive ? (dragging ? "grabbing" : "grab") : "pointer",
-                  boxShadow: isActive
-                    ? "0 16px 48px rgba(74,46,26,0.18)"
-                    : `0 ${4 + stackIndex * 2}px ${12 + stackIndex * 4}px rgba(74,46,26,${0.08 - stackIndex * 0.015})`,
+                  position: "absolute",
+                  bottom: `-${offset * 12}px`,
+                  left: `${offset * 8}px`,
+                  right: `${offset * 8}px`,
+                  height: "60px",
+                  background: "#FFFAF5",
+                  borderRadius: "1rem",
+                  border: "1px solid #E8D5C0",
+                  boxShadow: "0 4px 12px rgba(74,46,26,0.08)",
+                  zIndex: offset,
                 }}
-                onClick={!isActive ? () => setActive(i) : undefined}
-              >
-                <PortfolioCard {...c} />
-              </div>
+              />
             );
           })}
-        </div>
 
-        {/* Dot indicators */}
-        <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", marginTop: "1.5rem" }}>
-          {cases.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
-              style={{
-                width: i === active ? "1.5rem" : "0.5rem",
-                height: "0.5rem",
-                borderRadius: "1rem",
-                background: i === active ? "#C9603A" : "#E8D5C0",
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-                transition: "all 0.3s ease",
-              }}
-            />
-          ))}
-        </div>
+          {/* Active card */}
+          <div style={{ position: "relative", zIndex: 10, boxShadow: "0 16px 48px rgba(74,46,26,0.18)", transition: "transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.4s" }}>
+            <PortfolioCard key={active} {...cases[active]} />
+          </div>
 
+          {/* Swipe hint */}
+          <div style={{ position: "absolute", bottom: "-0.25rem", left: "50%", transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: "0.35rem" }}>
+            {cases.map((_, i) => (
+              <div key={i} onClick={() => setActive(i)} style={{ width: i === active ? "1.25rem" : "0.4rem", height: "0.4rem", borderRadius: "1rem", background: i === active ? "#C9603A" : "#E8D5C0", cursor: "pointer", transition: "all 0.3s" }} />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
