@@ -439,6 +439,18 @@ function Portfolio() {
       desc: "Корпоративний сайт та інтерактивна онлайн-платформа для вивчення англійської мови",
       images: ["/portfolio/speakup-1.png", "/portfolio/speakup-2.png", "/portfolio/speakup-3.png", "/portfolio/speakup-4.png"],
     },
+    {
+      title: "Play Vision",
+      tag: "PWA-платформа",
+      desc: "Футбольна освітня PWA-платформа: хаб знань з фільтрацією курсів, менторинг, івенти та AI-помічник",
+      images: ["/portfolio/play-vision-lap.png", "/portfolio/play-vision-tab.png", "/portfolio/play-vision-mb.png", "/portfolio/play-vision-desc.png"],
+    },
+    {
+      title: "Beauty Shop",
+      tag: "Інтернет-магазин",
+      desc: "Онлайн-магазин косметики та інструментів для б'юті-майстрів: каталог, кошик, промокоди, особистий кабінет",
+      images: ["/portfolio/beauty-shop-desc.png", "/portfolio/beauty-shop-lap.png", "/portfolio/beauty-shop-tab.png", "/portfolio/beauty-shop-mb.png"],
+    },
   ];
 
   const goNext = () => setActive(i => Math.min(i + 1, cases.length - 1));
