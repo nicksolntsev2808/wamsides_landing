@@ -465,7 +465,7 @@ function Portfolio() {
 
         {/* Carousel */}
         <div
-          style={{ overflow: "hidden" }}
+          style={{ overflow: "hidden", margin: "0 -1rem", padding: "0 1rem" }}
           onTouchStart={e => { startX.current = e.touches[0].clientX; }}
           onTouchEnd={e => {
             const diff = startX.current - e.changedTouches[0].clientX;
@@ -473,9 +473,9 @@ function Portfolio() {
             else if (diff < -50) setActive(i => Math.max(i - 1, 0));
           }}
         >
-          <div style={{ display: "flex", transition: "transform 0.4s cubic-bezier(0.4,0,0.2,1)", transform: `translateX(-${active * 100}%)` }}>
+          <div style={{ display: "flex", transition: "transform 0.4s cubic-bezier(0.4,0,0.2,1)", transform: `translateX(calc(-${active * 85}% - ${active * 1}rem))`, gap: "1rem" }}>
             {cases.map((c, i) => (
-              <div key={i} style={{ minWidth: "100%", flexShrink: 0, padding: "0.25rem" }}>
+              <div key={i} style={{ minWidth: "82%", flexShrink: 0, opacity: i === active ? 1 : 0.5, transform: i === active ? "scale(1)" : "scale(0.97)", transition: "all 0.4s" }}>
                 <PortfolioCard {...c} />
               </div>
             ))}
