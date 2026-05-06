@@ -465,12 +465,12 @@ function Portfolio() {
 
         {/* Stacked cards */}
         <div
-          style={{ position: "relative", height: "520px" }}
+          style={{ position: "relative", height: "560px", touchAction: "pan-y" }}
           onTouchStart={e => { startX.current = e.touches[0].clientX; }}
           onTouchEnd={e => {
             const diff = startX.current - e.changedTouches[0].clientX;
-            if (diff > 50) setActive(i => Math.min(i + 1, cases.length - 1));
-            else if (diff < -50) setActive(i => Math.max(i - 1, 0));
+            if (diff > 40) setActive(i => Math.min(i + 1, cases.length - 1));
+            else if (diff < -40) setActive(i => Math.max(i - 1, 0));
           }}
         >
           {cases.map((c, i) => {
@@ -482,21 +482,30 @@ function Portfolio() {
                 onClick={() => offset > 0 && setActive(i)}
                 style={{
                   position: "absolute",
-                  top: `${offset * 14}px`,
-                  left: `${offset * 10}px`,
-                  right: `-${offset * 10}px`,
+                  top: `${offset * 22}px`,
+                  left: `${offset * 16}px`,
+                  right: `-${offset * 16}px`,
                   zIndex: 10 - offset,
-                  transform: `scale(${1 - offset * 0.04})`,
-                  transformOrigin: "top center",
-                  transition: "all 0.4s cubic-bezier(0.4,0,0.2,1)",
+                  transform: `scale(${1 - offset * 0.05}) rotate(${offset * 1.5}deg)`,
+                  transformOrigin: "top left",
+                  transition: "all 0.45s cubic-bezier(0.4,0,0.2,1)",
                   cursor: offset > 0 ? "pointer" : "default",
-                  filter: offset > 0 ? `brightness(${1 - offset * 0.15})` : "none",
+                  filter: offset > 0 ? `brightness(${1 - offset * 0.2})` : "none",
+                  boxShadow: offset === 0 ? "0 20px 60px rgba(74,46,26,0.2)" : "none",
                 }}
               >
                 <PortfolioCard {...c} />
               </div>
             );
           })}
+
+          {/* Swipe hint */}
+          {active < cases.length - 1 && (
+            <div style={{ position: "absolute", bottom: "-2rem", left: "50%", transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: "0.4rem", opacity: 0.5 }}>
+              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#9E7A65" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+              <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", color: "#9E7A65" }}>свайп</span>
+            </div>
+          )}
         </div>
       </div>
     </section>
