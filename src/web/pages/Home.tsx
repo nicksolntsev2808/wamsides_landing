@@ -335,60 +335,30 @@ function Results() {
 
 /* ─── PORTFOLIO ─── */
 function PortfolioCard({ title, tag, desc, images }: { title: string; tag: string; desc: string; images: string[] }) {
-  const [active, setActive] = useState(0);
   return (
-    <div className="ws-card fade-up" style={{ padding: 0, overflow: "hidden", border: "1px solid #E8D5C0" }}>
-      {/* Image slider */}
-      <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", background: "#2C1A0E" }}>
+    <div className="ws-card" style={{ padding: 0, overflow: "hidden", border: "1px solid #E8D5C0" }}>
+      {/* Image — fixed height */}
+      <div style={{ height: "200px", overflow: "hidden", background: "#2C1A0E" }}>
         <img
-          src={images[active]}
+          src={images[0]}
           alt={title}
-          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "opacity 0.3s" }}
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", display: "block" }}
         />
-        {/* Dot indicators */}
-        {images.length > 1 && (
-          <div style={{ position: "absolute", bottom: "0.75rem", left: "50%", transform: "translateX(-50%)", display: "flex", gap: "0.4rem" }}>
-            {images.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                style={{ width: active === i ? "1.5rem" : "0.5rem", height: "0.5rem", borderRadius: "1rem", background: active === i ? "#C9603A" : "rgba(255,250,245,0.6)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.2s" }}
-              />
-            ))}
-          </div>
-        )}
-        {/* Prev/Next arrows */}
-        {images.length > 1 && (
-          <>
-            <button
-              onClick={() => setActive(i => (i - 1 + images.length) % images.length)}
-              style={{ position: "absolute", left: "0.75rem", top: "50%", transform: "translateY(-50%)", width: "2rem", height: "2rem", borderRadius: "50%", background: "rgba(255,250,245,0.85)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
-            >
-              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#4A2E1A" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
-            </button>
-            <button
-              onClick={() => setActive(i => (i + 1) % images.length)}
-              style={{ position: "absolute", right: "0.75rem", top: "50%", transform: "translateY(-50%)", width: "2rem", height: "2rem", borderRadius: "50%", background: "rgba(255,250,245,0.85)", border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
-            >
-              <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="#4A2E1A" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-            </button>
-          </>
-        )}
       </div>
       {/* Info */}
-      <div style={{ padding: "1.5rem" }}>
-        <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", fontWeight: 700, color: "#C9603A", textTransform: "uppercase", letterSpacing: "0.08em", background: "rgba(201,96,58,0.1)", padding: "0.25rem 0.75rem", borderRadius: "2rem", display: "inline-block", marginBottom: "0.75rem" }}>
+      <div style={{ padding: "1.25rem" }}>
+        <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.7rem", fontWeight: 700, color: "#C9603A", textTransform: "uppercase", letterSpacing: "0.08em", background: "rgba(201,96,58,0.1)", padding: "0.2rem 0.6rem", borderRadius: "2rem", display: "inline-block", marginBottom: "0.6rem" }}>
           {tag}
         </span>
-        <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.25rem", color: "#4A2E1A", margin: "0 0 0.5rem" }}>
+        <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.1rem", color: "#4A2E1A", margin: "0 0 0.4rem" }}>
           {title}
         </h3>
-        <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.875rem", color: "#5C3D2E", lineHeight: 1.65, margin: "0 0 1.25rem" }}>
+        <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#5C3D2E", lineHeight: 1.6, margin: "0 0 1rem" }}>
           {desc}
         </p>
         <button
           className="btn-primary"
-          style={{ width: "100%", textAlign: "center", fontSize: "0.9rem", padding: "0.75rem" }}
+          style={{ width: "100%", textAlign: "center", fontSize: "0.875rem", padding: "0.65rem" }}
           onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
         >
           Хочу такий сайт →
