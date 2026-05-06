@@ -463,9 +463,9 @@ function Portfolio() {
           </div>
         </div>
 
-        {/* Carousel */}
+        {/* Horizontal scroll */}
         <div
-          style={{ overflow: "visible", marginRight: "-2rem" }}
+          style={{ display: "flex", gap: "1rem", overflowX: "auto", scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch", paddingBottom: "0.5rem", scrollbarWidth: "none" }}
           onTouchStart={e => { startX.current = e.touches[0].clientX; }}
           onTouchEnd={e => {
             const diff = startX.current - e.changedTouches[0].clientX;
@@ -473,13 +473,11 @@ function Portfolio() {
             else if (diff < -50) setActive(i => Math.max(i - 1, 0));
           }}
         >
-          <div style={{ display: "flex", transition: "transform 0.4s cubic-bezier(0.4,0,0.2,1)", transform: `translateX(calc(-${active * 78}% - ${active * 0.75}rem))`, gap: "0.75rem" }}>
-            {cases.map((c, i) => (
-              <div key={i} style={{ minWidth: "75%", flexShrink: 0, opacity: i === active ? 1 : 0.45, transform: i === active ? "scale(1)" : "scale(0.96)", transition: "all 0.4s", pointerEvents: i === active ? "auto" : "none" }}>
-                <PortfolioCard {...c} />
-              </div>
-            ))}
-          </div>
+          {cases.map((c, i) => (
+            <div key={i} style={{ minWidth: "80%", flexShrink: 0, scrollSnapAlign: "start" }}>
+              <PortfolioCard {...c} />
+            </div>
+          ))}
         </div>
       </div>
     </section>
