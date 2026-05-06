@@ -431,6 +431,12 @@ function Portfolio() {
       desc: "Сучасний інтернет-магазин сухофруктів, горіхів та східних солодощів з mobile-first дизайном",
       images: ["/portfolio/finik-3.png", "/portfolio/finik-1.png", "/portfolio/finik-2.png"],
     },
+    {
+      title: "Speak Up",
+      tag: "Освітня платформа",
+      desc: "Корпоративний сайт та інтерактивна онлайн-платформа для вивчення англійської мови",
+      images: ["/portfolio/speakup-1.png", "/portfolio/speakup-2.png", "/portfolio/speakup-3.png", "/portfolio/speakup-4.png"],
+    },
   ];
 
   return (
@@ -465,7 +471,7 @@ function Portfolio() {
 
         {/* Stacked cards */}
         <div
-          style={{ position: "relative", height: "560px", touchAction: "pan-y" }}
+          style={{ position: "relative", paddingBottom: "3rem", touchAction: "pan-y" }}
           onTouchStart={e => { startX.current = e.touches[0].clientX; }}
           onTouchEnd={e => {
             const diff = startX.current - e.changedTouches[0].clientX;
@@ -473,37 +479,37 @@ function Portfolio() {
             else if (diff < -40) setActive(i => Math.max(i - 1, 0));
           }}
         >
-          {cases.map((c, i) => {
-            const offset = i - active;
-            if (offset < 0 || offset > 2) return null;
+          {/* Background cards — visible stack */}
+          {cases.slice(active + 1).reverse().map((c, ri) => {
+            const offset = cases.length - active - 1 - ri;
             return (
               <div
-                key={i}
-                onClick={() => offset > 0 && setActive(i)}
+                key={`bg-${active + 1 + ri}`}
                 style={{
                   position: "absolute",
-                  top: `${offset * 22}px`,
-                  left: `${offset * 16}px`,
-                  right: `-${offset * 16}px`,
-                  zIndex: 10 - offset,
-                  transform: `scale(${1 - offset * 0.05}) rotate(${offset * 1.5}deg)`,
-                  transformOrigin: "top left",
-                  transition: "all 0.45s cubic-bezier(0.4,0,0.2,1)",
-                  cursor: offset > 0 ? "pointer" : "default",
-                  filter: offset > 0 ? `brightness(${1 - offset * 0.2})` : "none",
-                  boxShadow: offset === 0 ? "0 20px 60px rgba(74,46,26,0.2)" : "none",
+                  bottom: `-${offset * 12}px`,
+                  left: `${offset * 8}px`,
+                  right: `${offset * 8}px`,
+                  height: "60px",
+                  background: "#FFFAF5",
+                  borderRadius: "1rem",
+                  border: "1px solid #E8D5C0",
+                  boxShadow: "0 4px 12px rgba(74,46,26,0.08)",
+                  zIndex: offset,
                 }}
-              >
-                <PortfolioCard {...c} />
-              </div>
+              />
             );
           })}
 
+          {/* Active card */}
+          <div style={{ position: "relative", zIndex: 10, boxShadow: "0 16px 48px rgba(74,46,26,0.18)" }}>
+            <PortfolioCard {...cases[active]} />
+          </div>
+
           {/* Swipe hint */}
           {active < cases.length - 1 && (
-            <div style={{ position: "absolute", bottom: "-2rem", left: "50%", transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: "0.4rem", opacity: 0.5 }}>
-              <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#9E7A65" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-              <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", color: "#9E7A65" }}>свайп</span>
+            <div style={{ position: "absolute", bottom: "-0.25rem", left: "50%", transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: "0.35rem" }}>
+              <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.75rem", color: "#9E7A65" }}>ще {cases.length - active - 1} {cases.length - active - 1 === 1 ? "кейс" : "кейси"} →</span>
             </div>
           )}
         </div>
