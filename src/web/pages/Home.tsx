@@ -419,6 +419,27 @@ function Portfolio() {
   const startX = useRef(0);
   const [dragging, setDragging] = useState(false);
   const [dragDelta, setDragDelta] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const firedRef = useRef(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !firedRef.current) {
+          firedRef.current = true;
+          window.gtag?.("event", "portfolio_view", {
+            event_category: "engagement",
+            event_label: "portfolio_section",
+          });
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const cases = [
     {
@@ -462,7 +483,7 @@ function Portfolio() {
   const STACK_ROTATE  =  2; // deg per layer tilt
 
   return (
-    <section style={{ background: "#FFFAF5", padding: "4.5rem 0", overflow: "hidden" }}>
+    <section ref={sectionRef} style={{ background: "#FFFAF5", padding: "4.5rem 0", overflow: "hidden" }}>
       <div className="ws-container">
 
         {/* Header */}
