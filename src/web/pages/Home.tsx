@@ -399,6 +399,7 @@ function PortfolioCard({ title, tag, desc, images }: { title: string; tag: strin
 }
 
 function Portfolio() {
+  const [active, setActive] = useState(0);
   const cases = [
     {
       title: "Daddy Smoke",
@@ -414,22 +415,91 @@ function Portfolio() {
     },
   ];
 
+  const trackRef = useRef<HTMLDivElement>(null);
+  const startX = useRef(0);
+  const isDragging = useRef(false);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const diff = startX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) setActive(i => Math.min(i + 1, cases.length - 1));
+      else setActive(i => Math.max(i - 1, 0));
+    }
+  };
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true;
+    startX.current = e.clientX;
+  };
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    const diff = startX.current - e.clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) setActive(i => Math.min(i + 1, cases.length - 1));
+      else setActive(i => Math.max(i - 1, 0));
+    }
+  };
+
   return (
     <section style={{ background: "#FFFAF5", padding: "4.5rem 0" }}>
       <div className="ws-container">
-        <div className="fade-up" style={{ marginBottom: "2rem" }}>
-          <span className="ws-tag">Наші роботи</span>
-          <div className="ws-divider"></div>
-          <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.5rem" }}>
-            Проєкти які ми реалізували
-          </h2>
-          <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "1rem", lineHeight: 1.75, margin: 0 }}>
-            Кожен сайт — окремий підхід під задачу клієнта
-          </p>
+        <div className="fade-up" style={{ marginBottom: "2rem", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
+          <div>
+            <span className="ws-tag">Наші роботи</span>
+            <div className="ws-divider"></div>
+            <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.25rem" }}>
+              Проєкти які ми реалізували
+            </h2>
+            <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "1rem", margin: 0 }}>
+              Кожен сайт — окремий підхід під задачу клієнта
+            </p>
+          </div>
+          {/* Arrow controls */}
+          <div style={{ display: "flex", gap: "0.5rem" }}>
+            <button
+              onClick={() => setActive(i => Math.max(i - 1, 0))}
+              style={{ width: "2.75rem", height: "2.75rem", borderRadius: "50%", border: "1px solid #E8D5C0", background: active === 0 ? "#F0E6D3" : "#FFFAF5", cursor: active === 0 ? "default" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s" }}
+            >
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke={active === 0 ? "#C9B8A8" : "#4A2E1A"} strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <button
+              onClick={() => setActive(i => Math.min(i + 1, cases.length - 1))}
+              style={{ width: "2.75rem", height: "2.75rem", borderRadius: "50%", border: "1px solid #E8D5C0", background: active === cases.length - 1 ? "#F0E6D3" : "#C9603A", cursor: active === cases.length - 1 ? "default" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.2s" }}
+            >
+              <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke={active === cases.length - 1 ? "#C9B8A8" : "#FFFAF5"} strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+            </button>
+          </div>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
-          {cases.map((c, i) => (
-            <PortfolioCard key={i} {...c} />
+
+        {/* Carousel track */}
+        <div
+          ref={trackRef}
+          style={{ overflow: "hidden", cursor: "grab", userSelect: "none" }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+        >
+          <div style={{ display: "flex", transition: "transform 0.4s cubic-bezier(0.4,0,0.2,1)", transform: `translateX(calc(-${active * 100}% - ${active * 1.5}rem))`, gap: "1.5rem" }}>
+            {cases.map((c, i) => (
+              <div key={i} style={{ minWidth: "100%", flexShrink: 0 }}>
+                <PortfolioCard {...c} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Dot indicators */}
+        <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", marginTop: "1.5rem" }}>
+          {cases.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              style={{ width: active === i ? "2rem" : "0.5rem", height: "0.5rem", borderRadius: "1rem", background: active === i ? "#C9603A" : "#E8D5C0", border: "none", cursor: "pointer", padding: 0, transition: "all 0.3s" }}
+            />
           ))}
         </div>
       </div>
