@@ -463,9 +463,9 @@ function Portfolio() {
           </div>
         </div>
 
-        {/* Horizontal scroll */}
+        {/* Stacked cards */}
         <div
-          style={{ display: "flex", gap: "1rem", overflowX: "auto", scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch", paddingBottom: "0.5rem", scrollbarWidth: "none" }}
+          style={{ position: "relative", height: "520px" }}
           onTouchStart={e => { startX.current = e.touches[0].clientX; }}
           onTouchEnd={e => {
             const diff = startX.current - e.changedTouches[0].clientX;
@@ -473,11 +473,30 @@ function Portfolio() {
             else if (diff < -50) setActive(i => Math.max(i - 1, 0));
           }}
         >
-          {cases.map((c, i) => (
-            <div key={i} style={{ minWidth: "80%", flexShrink: 0, scrollSnapAlign: "start" }}>
-              <PortfolioCard {...c} />
-            </div>
-          ))}
+          {cases.map((c, i) => {
+            const offset = i - active;
+            if (offset < 0 || offset > 2) return null;
+            return (
+              <div
+                key={i}
+                onClick={() => offset > 0 && setActive(i)}
+                style={{
+                  position: "absolute",
+                  top: `${offset * 14}px`,
+                  left: `${offset * 10}px`,
+                  right: `-${offset * 10}px`,
+                  zIndex: 10 - offset,
+                  transform: `scale(${1 - offset * 0.04})`,
+                  transformOrigin: "top center",
+                  transition: "all 0.4s cubic-bezier(0.4,0,0.2,1)",
+                  cursor: offset > 0 ? "pointer" : "default",
+                  filter: offset > 0 ? `brightness(${1 - offset * 0.15})` : "none",
+                }}
+              >
+                <PortfolioCard {...c} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
