@@ -410,6 +410,7 @@ function PortfolioCard({ title, tag, desc, images }: { title: string; tag: strin
           </button>
         </div>
       </div>
+      <StickyButton />
     </>
   );
 }
@@ -983,6 +984,64 @@ function Footer() {
 }
 
 /* ─── PAGE ─── */
+
+function StickyButton() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      // Show after scrolling 300px, hide when contact section is visible
+      const contactEl = document.getElementById('contact');
+      if (contactEl) {
+        const rect = contactEl.getBoundingClientRect();
+        const contactVisible = rect.top < window.innerHeight * 0.8;
+        setVisible(window.scrollY > 300 && !contactVisible);
+      } else {
+        setVisible(window.scrollY > 300);
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const handleClick = () => {
+    window.gtag?.('event', 'sticky_cta_click', {
+      event_category: 'engagement',
+      event_label: 'sticky_button',
+    });
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <button
+      onClick={handleClick}
+      style={{
+        position: 'fixed',
+        bottom: '1.5rem',
+        left: '50%',
+        transform: visible ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(120px)',
+        zIndex: 1000,
+        background: '#C9603A',
+        color: '#FFFAF5',
+        border: 'none',
+        borderRadius: '3rem',
+        padding: '0.85rem 2rem',
+        fontFamily: 'Nunito, sans-serif',
+        fontWeight: 800,
+        fontSize: '1rem',
+        cursor: 'pointer',
+        boxShadow: '0 8px 32px rgba(201,96,58,0.45)',
+        transition: 'transform 0.4s cubic-bezier(0.34,1.4,0.64,1)',
+        whiteSpace: 'nowrap',
+        letterSpacing: '0.01em',
+        pointerEvents: visible ? 'auto' : 'none',
+      }}
+    >
+      Дізнатися вартість →
+    </button>
+  );
+}
+
 export default function Home() {
   useFadeUp();
 
