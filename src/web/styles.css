@@ -267,6 +267,20 @@ body {
     grid-template-columns: 1fr !important;
     gap: 2rem !important;
   }
+  .ws-grid-2col > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* Reduce contact form card padding on narrow screens */
+  #contact .ws-card {
+    padding: 1.25rem !important;
+  }
+
+  /* Disable hover lift on cards for touch devices */
+  .ws-card:hover {
+    transform: none;
+  }
 }
 
 .ws-grid-2col {
