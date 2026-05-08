@@ -95,6 +95,39 @@ function Nav() {
 
 /* ─── HERO ─── */
 function Hero() {
+  const [heroForm, setHeroForm] = useState({ name: "", phone: "" });
+  const [heroSent, setHeroSent] = useState(false);
+  const [heroError, setHeroError] = useState(false);
+
+  const handleHeroSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setHeroError(false);
+    try {
+      const body = new URLSearchParams({
+        "form-name": "contact",
+        name: heroForm.name,
+        phone: heroForm.phone,
+      });
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (res.ok) {
+        window.gtag?.("event", "generate_lead", {
+          event_category: "conversion",
+          event_label: "hero_form",
+        });
+        window.fbq?.("track", "Lead");
+        window.location.href = "/success.html?success=true";
+      } else {
+        setHeroError(true);
+      }
+    } catch {
+      setHeroError(true);
+    }
+  };
+
   return (
     <section id="hero" style={{ background: "#FFFAF5", padding: "5rem 0 3rem", position: "relative", overflow: "clip", maxWidth: "100%" }}>
       {/* Decorative blob — clipped to section */}
@@ -124,16 +157,56 @@ function Hero() {
         </h1>
 
         {/* Sub */}
-        <p className="fade-up fade-up-delay-2" style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.15rem", color: "#5C3D2E", maxWidth: "560px", lineHeight: 1.75, marginBottom: "2.5rem" }}>
+        <p className="fade-up fade-up-delay-2" style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.15rem", color: "#5C3D2E", maxWidth: "560px", lineHeight: 1.75, marginBottom: "2rem" }}>
           Розробляємо сайти під ключ — від дизайну до запуску.
         </p>
 
-        {/* CTAs */}
-        <div className="fade-up fade-up-delay-3" style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
-          <button className="btn-primary" style={{ fontSize: "1.05rem", padding: "0.9rem 2rem" }} onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}>
-            Дізнатися вартість →
-          </button>
-
+        {/* Inline hero form */}
+        <div className="fade-up fade-up-delay-3" style={{ maxWidth: "480px" }}>
+          {heroSent ? (
+            <div className="ws-card" style={{ padding: "1.5rem", textAlign: "center" }}>
+              <p style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, color: "#4A2E1A", margin: 0 }}>
+                Дякуємо! Зв'яжемося протягом 10 хвилин ⚡
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleHeroSubmit} name="contact" data-netlify="true" netlify-honeypot="bot-field" style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+              <input type="hidden" name="form-name" value="contact" />
+              <input type="hidden" name="bot-field" />
+              <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+                <input
+                  className="ws-input"
+                  type="text"
+                  name="name"
+                  placeholder="Ваше ім'я"
+                  autoComplete="name"
+                  value={heroForm.name}
+                  onChange={e => setHeroForm(f => ({ ...f, name: e.target.value }))}
+                  required
+                  style={{ flex: "1 1 140px", minWidth: 0 }}
+                />
+                <input
+                  className="ws-input"
+                  type="text"
+                  name="phone"
+                  placeholder="+380 __ ___ __ __"
+                  autoComplete="tel"
+                  value={heroForm.phone}
+                  onChange={e => setHeroForm(f => ({ ...f, phone: e.target.value }))}
+                  required
+                  style={{ flex: "1 1 160px", minWidth: 0 }}
+                />
+              </div>
+              {heroError && (
+                <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#C9603A", margin: 0 }}>
+                  Помилка. Спробуйте ще раз.
+                </p>
+              )}
+              <button type="submit" className="btn-primary" style={{ width: "100%", textAlign: "center", fontSize: "1.05rem", padding: "0.9rem 2rem" }}>
+                Дізнатися вартість →
+              </button>
+            </form>
+          )}
         </div>
 
         {/* Social proof */}
@@ -270,29 +343,29 @@ function Solution() {
 function Results() {
   const items = [
     {
-      title: "Сайт під ключ за 4 тижні",
-      desc: "Від ідеї до готового результату — без зайвого клопоту",
+      title: "Більше заявок з реклами",
+      desc: "Структура сторінки заточена під конверсію — кожен блок веде до дії",
       icon: (
         <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
         </svg>
       ),
     },
     {
-      title: "Фіксована ціна",
-      desc: "Чіткий план і вартість одразу — без сюрпризів",
+      title: "Швидкість завантаження",
+      desc: "Сайт відкривається за 1–2 секунди навіть на мобільному 3G",
       icon: (
         <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
       ),
     },
     {
-      title: "Готовність до реклами",
-      desc: "Сайт налаштований і готовий до запуску кампаній",
+      title: "Адаптація під мобільний",
+      desc: "80% трафіку йде зі смартфонів — ваш сайт буде ідеальним на кожному екрані",
       icon: (
         <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z" />
         </svg>
       ),
     },
@@ -305,10 +378,10 @@ function Results() {
           <span className="ws-tag">Що ви отримаєте</span>
           <div className="ws-divider" style={{ margin: "1rem auto" }}></div>
           <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#4A2E1A", marginTop: 0, marginBottom: "0.75rem" }}>
-            Зробимо сайт який вирішує вашу задачу
+            Результати, які відчуває бізнес
           </h2>
           <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "1rem", maxWidth: "460px", lineHeight: 1.75, margin: "0 auto" }}>
-            Беремо на себе все — від структури до запуску
+            Не просто красивий сайт — а робочий інструмент продажів
           </p>
         </div>
 
@@ -628,7 +701,7 @@ function Portfolio() {
 function Reviews() {
   const reviews = [
     {
-      quote: "З Warmsides пропрацювали цільову аудиторію і структуру сторінки. Це кардинально вплинуло на якість заявок.",
+      quote: "З Warmsides пропрацювали цільову аудиторію і структуру сторінки. Конверсія в заявку зросла з 1.2% до 4.8% — це кардинально вплинуло на якість і кількість клієнтів.",
       name: "Наталія Сотніченко",
       role: "Співвласниця школи англійської NaEasy",
       initials: "НС",
@@ -636,7 +709,7 @@ function Reviews() {
       photo: "/avatars/natalia.jpg",
     },
     {
-      quote: "Запустили інтернет-магазин із чітким планом. Зручна адмінка, детальна статистика. Продовжуємо розвивати магазин. 🔥",
+      quote: "Запустили інтернет-магазин із чітким планом. Перші 30 замовлень отримали вже за перший тиждень після запуску реклами. Зручна адмінка, детальна статистика. 🔥",
       name: "Анна Савченко",
       role: "Маркетинговий директор Vapors",
       initials: "АС",
@@ -644,7 +717,7 @@ function Reviews() {
       photo: "/avatars/andriy.jpg",
     },
     {
-      quote: "Warmsides запропонували прості рішення, які зробили продукт зручнішим і логічнішим для користувачів.",
+      quote: "Warmsides запропонували прості рішення, які зробили продукт зручнішим. Час на онбординг нових користувачів скоротився вдвічі — з 6 до 3 хвилин.",
       name: "Євген Костін",
       role: "CEO Freudika",
       initials: "ЄК",
@@ -1021,11 +1094,11 @@ function Footer() {
           </div>
           <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
             {[
-              { label: "Telegram", href: "#" },
-              { label: "WhatsApp", href: "#" },
+              { label: "Telegram", href: "https://t.me/NS940828" },
+              { label: "WhatsApp", href: "https://wa.me/380675311952" },
               { label: "hello@warmsides.com", href: "mailto:hello@warmsides.com" },
             ].map(({ label, href }) => (
-              <a key={label} href={href} style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: "#F0E6D3", textDecoration: "none", opacity: 0.8, transition: "opacity 0.2s" }}
+              <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: "#F0E6D3", textDecoration: "none", opacity: 0.8, transition: "opacity 0.2s" }}
                 onMouseEnter={e => (e.target as HTMLElement).style.opacity = "1"}
                 onMouseLeave={e => (e.target as HTMLElement).style.opacity = "0.8"}
               >
@@ -1039,7 +1112,7 @@ function Footer() {
             © 2016 — 2026 Warmsides. All rights reserved.
           </p>
           <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "#9E7A65", margin: 0 }}>
-            Київ · Харків · Амстердам
+            Одеса · Амстердам
           </p>
         </div>
       </div>
