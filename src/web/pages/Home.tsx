@@ -410,7 +410,6 @@ function PortfolioCard({ title, tag, desc, images }: { title: string; tag: strin
           </button>
         </div>
       </div>
-      <StickyButton />
     </>
   );
 }
@@ -829,6 +828,10 @@ function Contact() {
                 <input type="hidden" name="bot-field" />
 
                 <div style={{ marginBottom: "0.25rem" }}>
+                  <div style={{ background: "linear-gradient(135deg, rgba(201,96,58,0.08), rgba(232,137,90,0.05))", border: "1px solid rgba(201,96,58,0.2)", borderRadius: "0.75rem", padding: "0.75rem 1rem", marginBottom: "1rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65" }}>Вартість проєкту</span>
+                    <span style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.1rem", color: "#C9603A" }}>до $299</span>
+                  </div>
                   <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.4rem", color: "#4A2E1A", margin: "0 0 0.25rem" }}>Залишити заявку</h3>
                   <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", margin: 0 }}>Розрахуємо вартість і розповімо про етапи запуску</p>
                 </div>
@@ -867,7 +870,7 @@ function Contact() {
                   </p>
                 )}
                 <button type="submit" className="btn-primary" style={{ width: "100%", textAlign: "center", marginTop: "0.25rem" }}>
-                  Дізнатися вартість
+                  Отримати план за 10 хвилин →
                 </button>
 
               </form>
@@ -983,6 +986,80 @@ function Footer() {
   );
 }
 
+/* ─── FAQ ─── */
+function FAQ() {
+  const [open, setOpen] = useState<number | null>(null);
+
+  const items = [
+    {
+      q: "Скільки коштує розробка сайту?",
+      a: "Вартість стартує до $299 за лендінг і від $3 000 за інтернет-магазин. Точна цифра залежить від обсягу — розрахуємо безкоштовно після короткого дзвінка.",
+    },
+    {
+      q: "Скільки часу займе розробка?",
+      a: "Стандартний термін — 4 тижні від затвердження структури до запуску. Це фіксований дедлайн, а не приблизна оцінка.",
+    },
+    {
+      q: "Що якщо мені не сподобається результат?",
+      a: "Ми презентуємо дизайн до верстки і вносимо правки до затвердження. Якщо після старту щось потрібно змінити — перші 2 тижні правки включені в ціну.",
+    },
+    {
+      q: "Чи є підтримка після здачі проєкту?",
+      a: "Так. Протягом 30 днів після запуску ми на зв'язку і виправляємо баги безкоштовно. Подальша підтримка обговорюється окремо.",
+    },
+  ];
+
+  return (
+    <section style={{ background: "#F0E6D3", padding: "4rem 0" }}>
+      <div className="ws-container">
+        <div className="fade-up" style={{ marginBottom: "2rem", textAlign: "center" }}>
+          <span className="ws-tag">Питання та відповіді</span>
+          <div className="ws-divider" style={{ margin: "1rem auto" }}></div>
+          <h2 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(1.6rem, 3vw, 2.2rem)", color: "#4A2E1A", marginTop: 0 }}>
+            Часті запитання
+          </h2>
+        </div>
+
+        <div className="fade-up" style={{ maxWidth: "680px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+          {items.map((item, i) => (
+            <div
+              key={i}
+              style={{ background: "#FFFAF5", borderRadius: "1rem", border: "1px solid #E8D5C0", overflow: "hidden" }}
+            >
+              <button
+                onClick={() => setOpen(open === i ? null : i)}
+                style={{
+                  width: "100%", background: "none", border: "none", cursor: "pointer",
+                  padding: "1.25rem 1.5rem", display: "flex", alignItems: "center",
+                  justifyContent: "space-between", gap: "1rem", textAlign: "left",
+                }}
+              >
+                <span style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "1rem", color: "#4A2E1A", lineHeight: 1.4 }}>
+                  {item.q}
+                </span>
+                <svg
+                  width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2.5"
+                  style={{ flexShrink: 0, transform: open === i ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.25s ease" }}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {open === i && (
+                <div style={{ padding: "0 1.5rem 1.25rem" }}>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: "#5C3D2E", lineHeight: 1.7, margin: 0 }}>
+                    {item.a}
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 /* ─── PAGE ─── */
 
 function StickyButton() {
@@ -1053,8 +1130,10 @@ export default function Home() {
       <Results />
       <Portfolio />
       <Reviews />
+      <FAQ />
       <Contact />
       <Footer />
+      <StickyButton />
     </>
   );
 }
