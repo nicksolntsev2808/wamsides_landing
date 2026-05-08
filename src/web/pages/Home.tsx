@@ -828,12 +828,16 @@ function Contact() {
                 <input type="hidden" name="bot-field" />
 
                 <div style={{ marginBottom: "0.25rem" }}>
-                  <div style={{ background: "linear-gradient(135deg, rgba(201,96,58,0.08), rgba(232,137,90,0.05))", border: "1px solid rgba(201,96,58,0.2)", borderRadius: "0.75rem", padding: "0.75rem 1rem", marginBottom: "1rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65" }}>Вартість проєкту</span>
-                    <span style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.1rem", color: "#C9603A" }}>до $299</span>
-                  </div>
                   <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.4rem", color: "#4A2E1A", margin: "0 0 0.25rem" }}>Залишити заявку</h3>
-                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", margin: 0 }}>Розрахуємо вартість і розповімо про етапи запуску</p>
+                  <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", margin: "0 0 1rem" }}>Розрахуємо вартість і розповімо про етапи запуску</p>
+
+                  {/* Price badge */}
+                  <div style={{ background: "linear-gradient(135deg, #C9603A, #E8895A)", borderRadius: "1rem", padding: "1rem 1.25rem", marginBottom: "0.25rem" }}>
+                    <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "0.3rem" }}>
+                      <span style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.75rem", color: "#FFFAF5", lineHeight: 1 }}>$199 — $299</span>
+                    </div>
+                    <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "rgba(255,250,245,0.8)" }}>залежно від завдання</span>
+                  </div>
                 </div>
 
                 <div>
