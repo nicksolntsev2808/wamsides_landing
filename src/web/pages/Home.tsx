@@ -518,7 +518,7 @@ function Portfolio() {
 
         {/* Deck wrapper — gives height for absolute children */}
         <div
-          style={{ position: "relative", touchAction: "pan-y", userSelect: "none" }}
+          style={{ position: "relative", touchAction: "pan-y", userSelect: "none", overflow: "hidden", paddingBottom: "1rem" }}
           onTouchStart={e => {
             startX.current = e.touches[0].clientX;
             setDragging(true);
