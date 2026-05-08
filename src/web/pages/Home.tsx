@@ -789,7 +789,7 @@ function Contact() {
           </h2>
         </div>
 
-        <div className="ws-grid-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", alignItems: "start" }}>
+        <div className="ws-grid-2col" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))", gap: "2rem", alignItems: "start" }}>
 
           {/* Left — Form */}
           <div ref={formRef} className="fade-up ws-card" style={{ padding: "2.5rem" }}>
