@@ -1264,7 +1264,6 @@ export default function Home() {
       <Results />
       <Portfolio />
       <Reviews />
-      <FAQ />
       <Contact />
       <Footer />
       <StickyButton />
