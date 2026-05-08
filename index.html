@@ -56,15 +56,5 @@
 		</form>
 
 		<script type="module" src="/src/web/main.tsx"></script>
-		<script>
-			setTimeout(() => {
-				document.querySelectorAll('*').forEach(el => {
-					if (el.getBoundingClientRect().right > window.innerWidth + 1) {
-						el.style.outline = '3px solid red';
-						console.log('OVERFLOW:', el.tagName, el.className, Math.round(el.getBoundingClientRect().right));
-					}
-				});
-			}, 2000);
-		</script>
 	</body>
 </html>

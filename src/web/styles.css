@@ -269,6 +269,10 @@ body {
   }
 }
 
+.ws-grid-2col {
+  grid-template-columns: 1fr 1fr;
+}
+
 /* Timeline */
 .timeline-item {
   display: flex;
