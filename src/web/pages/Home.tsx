@@ -96,7 +96,7 @@ function Nav() {
 /* ─── HERO ─── */
 function Hero() {
   return (
-    <section id="hero" style={{ background: "#FFFAF5", padding: "5rem 0 3rem", position: "relative", overflow: "hidden", maxWidth: "100%" }}>
+    <section id="hero" style={{ background: "#FFFAF5", padding: "5rem 0 3rem", position: "relative", overflow: "clip", maxWidth: "100%" }}>
       {/* Decorative blob — clipped to section */}
       <div
         className="ws-blob"
@@ -105,6 +105,7 @@ function Hero() {
           background: "linear-gradient(135deg, rgba(201,96,58,0.08), rgba(232,137,90,0.06))",
           top: "-80px", right: "-100px",
           zIndex: 0,
+          overflow: "hidden",
         }}
       />
       <div className="ws-container" style={{ position: "relative", zIndex: 1 }}>
@@ -496,7 +497,7 @@ function Portfolio() {
   const STACK_ROTATE  =  2; // deg per layer tilt
 
   return (
-    <section ref={sectionRef} style={{ background: "#FFFAF5", padding: "4.5rem 0", overflow: "hidden" }}>
+    <section ref={sectionRef} style={{ background: "#FFFAF5", padding: "4.5rem 0", overflow: "clip" }}>
       <div className="ws-container">
 
         {/* Header */}
