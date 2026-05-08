@@ -816,6 +816,7 @@ function Contact() {
       event_category: "engagement",
       event_label: "price_block",
     });
+    window.fbq?.("trackCustom", "PriceReveal");
   };
 
   useEffect(() => {
