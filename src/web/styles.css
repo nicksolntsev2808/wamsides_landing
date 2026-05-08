@@ -284,3 +284,13 @@ body {
   font-size: 0.9rem;
   flex-shrink: 0;
 }
+
+@keyframes pulse-cta {
+  0%, 100% { box-shadow: 0 4px 24px rgba(201,96,58,0.3); transform: scale(1); }
+  50% { box-shadow: 0 8px 32px rgba(201,96,58,0.55); transform: scale(1.015); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

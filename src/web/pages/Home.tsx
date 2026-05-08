@@ -474,8 +474,21 @@ function Portfolio() {
     },
   ];
 
-  const goNext = () => setActive(i => Math.min(i + 1, cases.length - 1));
-  const goPrev = () => setActive(i => Math.max(i - 1, 0));
+  const fireCardClick = (method: string) => {
+    window.gtag?.("event", "portfolio_card_click", {
+      event_category: "engagement",
+      event_label: method,
+    });
+  };
+
+  const goNext = () => {
+    setActive(i => Math.min(i + 1, cases.length - 1));
+    fireCardClick("arrow");
+  };
+  const goPrev = () => {
+    setActive(i => Math.max(i - 1, 0));
+    fireCardClick("arrow");
+  };
 
   // Cards behind active — peeking from the right-bottom
   const STACK_OFFSET_X = 14; // px per layer shift right
@@ -528,8 +541,8 @@ function Portfolio() {
             setDragDelta(e.touches[0].clientX - startX.current);
           }}
           onTouchEnd={() => {
-            if (dragDelta < -40) goNext();
-            else if (dragDelta > 40) goPrev();
+            if (dragDelta < -40) { goNext(); fireCardClick("swipe"); }
+            else if (dragDelta > 40) { goPrev(); fireCardClick("swipe"); }
             setDragging(false);
             setDragDelta(0);
           }}
@@ -561,7 +574,7 @@ function Portfolio() {
             return (
               <div
                 key={c.title}
-                onClick={!isActive ? () => setActive(i) : undefined}
+                onClick={!isActive ? () => { setActive(i); fireCardClick("card"); } : undefined}
                 style={{
                   position: "absolute",
                   top: 0,
@@ -720,7 +733,16 @@ function Contact() {
   const [form, setForm] = useState({ name: "", phone: "" });
   const [sent, setSent] = useState(() => new URLSearchParams(window.location.search).get("success") === "true");
   const [error, setError] = useState(false);
+  const [priceRevealed, setPriceRevealed] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
+
+  const handleRevealPrice = () => {
+    setPriceRevealed(true);
+    window.gtag?.("event", "price_reveal_click", {
+      event_category: "engagement",
+      event_label: "price_block",
+    });
+  };
 
   useEffect(() => {
     const el = formRef.current;
@@ -831,13 +853,47 @@ function Contact() {
                   <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.4rem", color: "#4A2E1A", margin: "0 0 0.25rem" }}>Залишити заявку</h3>
                   <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#9E7A65", margin: "0 0 1rem" }}>Розрахуємо вартість і розповімо про етапи запуску</p>
 
-                  {/* Price badge */}
-                  <div style={{ background: "linear-gradient(135deg, #C9603A, #E8895A)", borderRadius: "1rem", padding: "1rem 1.25rem", marginBottom: "0.25rem" }}>
-                    <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "0.3rem" }}>
-                      <span style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.75rem", color: "#FFFAF5", lineHeight: 1 }}>$199 — $299</span>
+                  {/* Price badge — reveal on click */}
+                  {!priceRevealed ? (
+                    <div
+                      onClick={handleRevealPrice}
+                      style={{
+                        background: "linear-gradient(135deg, #C9603A, #E8895A)",
+                        borderRadius: "1rem",
+                        padding: "1rem 1.25rem",
+                        marginBottom: "0.25rem",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: "0.75rem",
+                        animation: "pulse-cta 2s ease-in-out infinite",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                        <span style={{ fontSize: "1.3rem" }}>👆</span>
+                        <span style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#FFFAF5", lineHeight: 1.3 }}>
+                          Натисни, щоб дізнатися вартість
+                        </span>
+                      </div>
+                      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="rgba(255,250,245,0.8)" strokeWidth="2.5" style={{ flexShrink: 0 }}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
                     </div>
-                    <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "rgba(255,250,245,0.8)" }}>залежно від завдання</span>
-                  </div>
+                  ) : (
+                    <div style={{
+                      background: "linear-gradient(135deg, #C9603A, #E8895A)",
+                      borderRadius: "1rem",
+                      padding: "1rem 1.25rem",
+                      marginBottom: "0.25rem",
+                      animation: "fadeInDown 0.35s ease",
+                    }}>
+                      <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "0.3rem" }}>
+                        <span style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.75rem", color: "#FFFAF5", lineHeight: 1 }}>$199 — $299</span>
+                      </div>
+                      <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "rgba(255,250,245,0.8)" }}>залежно від завдання</span>
+                    </div>
+                  )}
                 </div>
 
                 <div>
