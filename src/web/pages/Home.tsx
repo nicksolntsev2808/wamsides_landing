@@ -203,7 +203,7 @@ function Hero() {
                 </p>
               )}
               <button type="submit" className="btn-primary" style={{ width: "100%", textAlign: "center", fontSize: "1.05rem", padding: "0.9rem 2rem" }}>
-                Дізнатися вартість →
+                Отримати план і ціну →
               </button>
             </form>
           )}
@@ -964,9 +964,9 @@ function Contact() {
                       animation: "fadeInDown 0.35s ease",
                     }}>
                       <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "0.3rem" }}>
-                        <span style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.75rem", color: "#FFFAF5", lineHeight: 1 }}>$199 — $299</span>
+                        <span style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.75rem", color: "#FFFAF5", lineHeight: 1 }}>від $199</span>
                       </div>
-                      <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "rgba(255,250,245,0.8)" }}>залежно від завдання</span>
+                      <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "rgba(255,250,245,0.8)" }}>точну вартість розрахуємо під ваше завдання</span>
                     </div>
                   )}
                 </div>
@@ -1249,7 +1249,7 @@ function StickyButton() {
         pointerEvents: visible ? 'auto' : 'none',
       }}
     >
-      Дізнатися вартість →
+      Отримати план і ціну →
     </button>
   );
 }
