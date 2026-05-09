@@ -151,14 +151,14 @@ function Hero() {
 
         {/* Headline */}
         <h1 className="fade-up fade-up-delay-1" style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(2.2rem, 5vw, 4.5rem)", lineHeight: 1.1, color: "#4A2E1A", maxWidth: "800px", marginBottom: "1.5rem" }}>
-          Створюємо сайти,{" "}
-          <span className="ws-gradient-text">які працюють</span>{" "}
-          на ваш бізнес
+          Сайт під ключ{" "}
+          <span className="ws-gradient-text">від $199</span>
+          {" — "}готовий за 2–4 тижні
         </h1>
 
         {/* Sub */}
         <p className="fade-up fade-up-delay-2" style={{ fontFamily: "Nunito, sans-serif", fontSize: "1.15rem", color: "#5C3D2E", maxWidth: "560px", lineHeight: 1.75, marginBottom: "2rem" }}>
-          Розробляємо сайти під ключ — від дизайну до запуску.
+          Лендінги, інтернет-магазини та корпоративні сайти. Фіксована ціна, без прихованих доплат.
         </p>
 
         {/* Inline hero form */}
@@ -248,6 +248,7 @@ function Solution() {
       num: "01",
       title: "Аналіз",
       desc: "Вивчаємо ваш бізнес, ЦА та конкурентів. Формуємо офер і структуру.",
+      details: "30-хвилинний дзвінок, де розберемо вашу нішу, аудиторію та конкурентів. Ви отримаєте чіткий план з термінами та фіксованою ціною — безкоштовно.",
       icon: (
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -258,6 +259,7 @@ function Solution() {
       num: "02",
       title: "Структура",
       desc: "Будуємо UX-прототип під вашу аудиторію. Кожен блок має свою роль.",
+      details: "Створюємо wireframe кожної сторінки. Ви бачите структуру до початку дизайну і можете внести зміни. Жодної роботи «наосліп».",
       icon: (
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
@@ -268,6 +270,7 @@ function Solution() {
       num: "03",
       title: "Дизайн",
       desc: "Створюємо mobile-first дизайн з фокусом на конверсію, а не красу заради краси.",
+      details: "Презентуємо дизайн у Figma. До 3 раундів правок включено. Ви затверджуєте кожну сторінку перед версткою — без сюрпризів.",
       icon: (
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -278,6 +281,7 @@ function Solution() {
       num: "04",
       title: "Запуск",
       desc: "Верстаємо, тестуємо та запускаємо. Готовність до реклами за 4 тижні.",
+      details: "Адаптивна верстка, підключення аналітики (GA4, Meta Pixel), тестування на всіх пристроях. Після запуску — 30 днів безкоштовної підтримки.",
       icon: (
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -285,6 +289,19 @@ function Solution() {
       ),
     },
   ];
+
+  const [expandedStep, setExpandedStep] = useState<number | null>(null);
+
+  const toggleStep = (i: number) => {
+    const wasOpen = expandedStep === i;
+    setExpandedStep(wasOpen ? null : i);
+    if (!wasOpen) {
+      window.gtag?.("event", "step_expand", {
+        event_category: "engagement",
+        event_label: steps[i].title,
+      });
+    }
+  };
 
   return (
     <section id="solution" style={{ background: "#FFFAF5", padding: "4.5rem 0" }}>
@@ -303,7 +320,11 @@ function Solution() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.5rem", marginBottom: "2rem" }}>
           {steps.map((step, i) => (
             <div key={i} className={`fade-up fade-up-delay-${i + 1}`} style={{ position: "relative" }}>
-              <div className="ws-card" style={{ height: "100%", border: "1px solid #E8D5C0", padding: "2rem 1.75rem" }}>
+              <div
+                className="ws-card"
+                onClick={() => toggleStep(i)}
+                style={{ height: "100%", border: "1px solid #E8D5C0", padding: "2rem 1.75rem", cursor: "pointer", transition: "box-shadow 0.25s ease" }}
+              >
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.25rem" }}>
                   <div style={{ width: "3rem", height: "3rem", borderRadius: "0.875rem", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center", color: "#FFFAF5" }}>
                     {step.icon}
@@ -316,6 +337,22 @@ function Solution() {
                 <p style={{ fontFamily: "Nunito, sans-serif", color: "#9E7A65", fontSize: "0.9rem", lineHeight: 1.65, margin: 0 }}>
                   {step.desc}
                 </p>
+                {expandedStep === i && (
+                  <div style={{ marginTop: "0.75rem", paddingTop: "0.75rem", borderTop: "1px solid #E8D5C0", animation: "fadeInDown 0.25s ease" }}>
+                    <p style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "0.85rem", lineHeight: 1.7, margin: 0 }}>
+                      {step.details}
+                    </p>
+                  </div>
+                )}
+                <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginTop: "0.75rem" }}>
+                  <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", fontWeight: 600, color: "#C9603A" }}>
+                    {expandedStep === i ? "Згорнути" : "Детальніше"}
+                  </span>
+                  <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#C9603A" strokeWidth="2.5"
+                    style={{ transform: expandedStep === i ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.25s ease" }}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
               </div>
               {i < steps.length - 1 && (
                 <div style={{ display: "none" }} className="step-arrow" />
@@ -343,7 +380,8 @@ function Solution() {
 function Results() {
   const items = [
     {
-      title: "Більше заявок з реклами",
+      title: "Конверсія в заявки",
+      stat: "до 5%",
       desc: "Структура сторінки заточена під конверсію — кожен блок веде до дії",
       icon: (
         <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -352,8 +390,9 @@ function Results() {
       ),
     },
     {
-      title: "Швидкість завантаження",
-      desc: "Сайт відкривається за 1–2 секунди навіть на мобільному 3G",
+      title: "Завантаження за 1.2 сек",
+      stat: "98/100",
+      desc: "Google PageSpeed — ваш сайт не втрачає клієнтів через повільність",
       icon: (
         <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -361,8 +400,9 @@ function Results() {
       ),
     },
     {
-      title: "Адаптація під мобільний",
-      desc: "80% трафіку йде зі смартфонів — ваш сайт буде ідеальним на кожному екрані",
+      title: "Mobile-first дизайн",
+      stat: "80%",
+      desc: "трафіку йде зі смартфонів — ваш сайт буде ідеальним на кожному екрані",
       icon: (
         <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z" />
@@ -388,9 +428,12 @@ function Results() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1.25rem" }}>
           {items.map((item, i) => (
             <div key={i} className={`ws-card fade-up fade-up-delay-${i + 1}`} style={{ border: "1px solid #E8D5C0", textAlign: "center", padding: "2rem 1.5rem" }}>
-              <div style={{ width: "3.5rem", height: "3.5rem", borderRadius: "1rem", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center", color: "#FFFAF5", margin: "0 auto 1.25rem" }}>
+              <div style={{ width: "3.5rem", height: "3.5rem", borderRadius: "1rem", background: "linear-gradient(135deg, #C9603A, #E8895A)", display: "flex", alignItems: "center", justifyContent: "center", color: "#FFFAF5", margin: "0 auto 1rem" }}>
                 {item.icon}
               </div>
+              <span style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "2rem", color: "#C9603A", display: "block", marginBottom: "0.25rem" }}>
+                {item.stat}
+              </span>
               <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 700, fontSize: "1.05rem", color: "#4A2E1A", margin: "0 0 0.5rem" }}>
                 {item.title}
               </h3>
@@ -408,7 +451,7 @@ function Results() {
 
 
 /* ─── PORTFOLIO ─── */
-function PortfolioCard({ title, tag, desc, images }: { title: string; tag: string; desc: string; images: string[] }) {
+function PortfolioCard({ title, tag, desc, result, images }: { title: string; tag: string; desc: string; result: string; images: string[] }) {
   const [slide, setSlide] = useState(0);
   const [lightbox, setLightbox] = useState(false);
 
@@ -472,6 +515,9 @@ function PortfolioCard({ title, tag, desc, images }: { title: string; tag: strin
           <h3 style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "1.1rem", color: "#4A2E1A", margin: "0 0 0.4rem" }}>
             {title}
           </h3>
+          <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", fontWeight: 700, color: "#C9603A", margin: "0 0 0.4rem", lineHeight: 1.4 }}>
+            📈 {result}
+          </p>
           <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#5C3D2E", lineHeight: 1.6, margin: "0 0 1rem" }}>
             {desc}
           </p>
@@ -519,30 +565,35 @@ function Portfolio() {
     {
       title: "Daddy Smoke",
       tag: "Інтернет-магазин",
+      result: "Перші 30 замовлень за тиждень після запуску",
       desc: "Дизайн та розробка інтернет-магазину для українського виробника мангалів, грилів та BBQ обладнання",
       images: ["/portfolio/daddy-smoke-1.png", "/portfolio/daddy-smoke-2.png"],
     },
     {
       title: "Finik",
       tag: "Інтернет-магазин",
+      result: "Конверсія 4.2% з першого місяця реклами",
       desc: "Сучасний інтернет-магазин сухофруктів, горіхів та східних солодощів з mobile-first дизайном",
       images: ["/portfolio/finik-3.png", "/portfolio/finik-1.png", "/portfolio/finik-2.png"],
     },
     {
       title: "Speak Up",
       tag: "Освітня платформа",
+      result: "Час реєстрації скоротився з 5 до 2 хвилин",
       desc: "Корпоративний сайт та інтерактивна онлайн-платформа для вивчення англійської мови",
       images: ["/portfolio/speakup-1.png", "/portfolio/speakup-2.png", "/portfolio/speakup-3.png", "/portfolio/speakup-4.png"],
     },
     {
       title: "Play Vision",
       tag: "PWA-платформа",
+      result: "500+ користувачів за перший місяць",
       desc: "Футбольна освітня PWA-платформа: хаб знань з фільтрацією курсів, менторинг, івенти та AI-помічник",
       images: ["/portfolio/play-vision-lap.png", "/portfolio/play-vision-tab.png", "/portfolio/play-vision-mb.png", "/portfolio/play-vision-desc.png"],
     },
     {
       title: "Beauty Shop",
       tag: "Інтернет-магазин",
+      result: "PageSpeed 96/100 на мобільному",
       desc: "Онлайн-магазин косметики та інструментів для б'юті-майстрів: каталог, кошик, промокоди, особистий кабінет",
       images: ["/portfolio/beauty-shop-desc.png", "/portfolio/beauty-shop-lap.png", "/portfolio/beauty-shop-tab.png", "/portfolio/beauty-shop-mb.png"],
     },
@@ -1128,21 +1179,40 @@ function FAQ() {
   const items = [
     {
       q: "Скільки коштує розробка сайту?",
-      a: "Вартість стартує до $299 за лендінг і від $3 000 за інтернет-магазин. Точна цифра залежить від обсягу — розрахуємо безкоштовно після короткого дзвінка.",
+      a: "Лендінг — від $199, корпоративний сайт — від $599, інтернет-магазин — від $3 000. Точна ціна залежить від обсягу — розрахуємо безкоштовно після короткого дзвінка.",
+    },
+    {
+      q: "Чому так дешево?",
+      a: "Ми працюємо з перевіреними шаблонами та компонентами, що дозволяє скоротити час розробки без втрати якості. Ви не платите за \"винахід велосипеда\" — тільки за адаптацію під ваш бізнес.",
     },
     {
       q: "Скільки часу займе розробка?",
-      a: "Стандартний термін — 4 тижні від затвердження структури до запуску. Це фіксований дедлайн, а не приблизна оцінка.",
+      a: "Лендінг — 1–2 тижні, корпоративний сайт — 3–4 тижні, інтернет-магазин — 4–6 тижнів. Це фіксований дедлайн, а не приблизна оцінка.",
     },
     {
       q: "Що якщо мені не сподобається результат?",
-      a: "Ми презентуємо дизайн до верстки і вносимо правки до затвердження. Якщо після старту щось потрібно змінити — перші 2 тижні правки включені в ціну.",
+      a: "Ми презентуємо дизайн до верстки і вносимо правки до затвердження. До 3 раундів правок включено. Якщо після запуску щось потрібно змінити — перші 2 тижні правки безкоштовно.",
     },
     {
       q: "Чи є підтримка після здачі проєкту?",
       a: "Так. Протягом 30 днів після запуску ми на зв'язку і виправляємо баги безкоштовно. Подальша підтримка обговорюється окремо.",
     },
+    {
+      q: "Що потрібно від мене для старту?",
+      a: "Тільки ваша ідея або приклади сайтів, які подобаються. Тексти, фото та структуру ми допоможемо підготувати.",
+    },
   ];
+
+  const handleToggle = (i: number) => {
+    const wasOpen = open === i;
+    setOpen(wasOpen ? null : i);
+    if (!wasOpen) {
+      window.gtag?.("event", "faq_click", {
+        event_category: "engagement",
+        event_label: items[i].q,
+      });
+    }
+  };
 
   return (
     <section style={{ background: "#F0E6D3", padding: "4rem 0" }}>
@@ -1162,7 +1232,7 @@ function FAQ() {
               style={{ background: "#FFFAF5", borderRadius: "1rem", border: "1px solid #E8D5C0", overflow: "hidden" }}
             >
               <button
-                onClick={() => setOpen(open === i ? null : i)}
+                onClick={() => handleToggle(i)}
                 style={{
                   width: "100%", background: "none", border: "none", cursor: "pointer",
                   padding: "1.25rem 1.5rem", display: "flex", alignItems: "center",
@@ -1265,6 +1335,7 @@ export default function Home() {
       <Results />
       <Portfolio />
       <Reviews />
+      <FAQ />
       <Contact />
       <Footer />
       <StickyButton />
