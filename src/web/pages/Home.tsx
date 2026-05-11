@@ -151,9 +151,8 @@ function Hero() {
 
         {/* Headline */}
         <h1 className="fade-up fade-up-delay-1" style={{ fontFamily: "Raleway, sans-serif", fontWeight: 800, fontSize: "clamp(2.2rem, 5vw, 4.5rem)", lineHeight: 1.1, color: "#4A2E1A", maxWidth: "800px", marginBottom: "1.5rem" }}>
-          Сайт під ключ{" "}
-          <span className="ws-gradient-text">від $199</span>
-          {" — "}готовий за 2–4 тижні
+          Сайт під ключ{" — "}
+          <span className="ws-gradient-text">готовий за 2–4 тижні</span>
         </h1>
 
         {/* Sub */}
@@ -956,7 +955,10 @@ function Contact() {
                   <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: "#9E7A65", margin: 0 }}>
                     Якщо терміново — напишіть нам одразу у Telegram
                   </p>
-                  <a href="https://t.me/NS940828" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#C9603A", textDecoration: "none" }}>
+                  <a href="https://t.me/NS940828" target="_blank" rel="noopener noreferrer" onClick={() => {
+                    window.gtag?.("event", "telegram_click", { event_category: "conversion", event_label: "contact_section" });
+                    window.fbq?.("trackCustom", "TelegramClick");
+                  }} style={{ fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.95rem", color: "#C9603A", textDecoration: "none" }}>
                     @NS940828
                   </a>
                 </div>
@@ -1117,7 +1119,10 @@ function Contact() {
                 <div key={text} style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
                   <span style={{ fontSize: "1.1rem" }}>{icon}</span>
                   {href ? (
-                    <a href={href} style={{ fontFamily: "Nunito, sans-serif", color: "#C9603A", fontSize: "0.95rem", textDecoration: "none", fontWeight: 600 }}>{text}</a>
+                    <a href={href} onClick={() => {
+                      window.gtag?.("event", "phone_click", { event_category: "conversion", event_label: "contact_info" });
+                      window.fbq?.("trackCustom", "PhoneClick");
+                    }} style={{ fontFamily: "Nunito, sans-serif", color: "#C9603A", fontSize: "0.95rem", textDecoration: "none", fontWeight: 600 }}>{text}</a>
                   ) : (
                     <span style={{ fontFamily: "Nunito, sans-serif", color: "#5C3D2E", fontSize: "0.95rem" }}>{text}</span>
                   )}
@@ -1146,11 +1151,16 @@ function Footer() {
           </div>
           <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
             {[
-              { label: "Telegram", href: "https://t.me/NS940828" },
-              { label: "WhatsApp", href: "https://wa.me/380675311952" },
-              { label: "hello@warmsides.com", href: "mailto:hello@warmsides.com" },
-            ].map(({ label, href }) => (
+              { label: "Telegram", href: "https://t.me/NS940828", event: "telegram_click" },
+              { label: "WhatsApp", href: "https://wa.me/380675311952", event: "whatsapp_click" },
+              { label: "hello@warmsides.com", href: "mailto:hello@warmsides.com", event: "email_click" },
+            ].map(({ label, href, event }) => (
               <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined} style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.9rem", color: "#F0E6D3", textDecoration: "none", opacity: 0.8, transition: "opacity 0.2s" }}
+                onClick={() => {
+                  window.gtag?.("event", event, { event_category: "conversion", event_label: "footer" });
+                  if (event === "telegram_click") window.fbq?.("trackCustom", "TelegramClick");
+                  if (event === "whatsapp_click") window.fbq?.("trackCustom", "WhatsAppClick");
+                }}
                 onMouseEnter={e => (e.target as HTMLElement).style.opacity = "1"}
                 onMouseLeave={e => (e.target as HTMLElement).style.opacity = "0.8"}
               >
