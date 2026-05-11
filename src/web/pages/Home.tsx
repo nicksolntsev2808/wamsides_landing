@@ -1087,7 +1087,6 @@ function Contact() {
                   </svg>
                   Написати в Telegram
                 </a>
-                </button>
 
               </form>
             )}
