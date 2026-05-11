@@ -95,7 +95,7 @@ function Nav() {
 
 /* ─── HERO ─── */
 function Hero() {
-  const [heroForm, setHeroForm] = useState({ name: "", phone: "" });
+  const [heroPhone, setHeroPhone] = useState("");
   const [heroSent, setHeroSent] = useState(false);
   const [heroError, setHeroError] = useState(false);
 
@@ -105,8 +105,8 @@ function Hero() {
     try {
       const body = new URLSearchParams({
         "form-name": "contact",
-        name: heroForm.name,
-        phone: heroForm.phone,
+        name: "",
+        phone: heroPhone,
       });
       const res = await fetch("/", {
         method: "POST",
@@ -172,38 +172,49 @@ function Hero() {
             <form onSubmit={handleHeroSubmit} name="contact" data-netlify="true" netlify-honeypot="bot-field" style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               <input type="hidden" name="form-name" value="contact" />
               <input type="hidden" name="bot-field" />
-              <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+              <input type="hidden" name="name" value="" />
+              <div style={{ display: "flex", gap: "0.75rem" }}>
                 <input
                   className="ws-input"
-                  type="text"
-                  name="name"
-                  placeholder="Ваше ім'я"
-                  autoComplete="name"
-                  value={heroForm.name}
-                  onChange={e => setHeroForm(f => ({ ...f, name: e.target.value }))}
-                  required
-                  style={{ flex: "1 1 140px", minWidth: 0 }}
-                />
-                <input
-                  className="ws-input"
-                  type="text"
+                  type="tel"
                   name="phone"
                   placeholder="+380 __ ___ __ __"
                   autoComplete="tel"
-                  value={heroForm.phone}
-                  onChange={e => setHeroForm(f => ({ ...f, phone: e.target.value }))}
+                  value={heroPhone}
+                  onChange={e => setHeroPhone(e.target.value)}
                   required
-                  style={{ flex: "1 1 160px", minWidth: 0 }}
+                  style={{ flex: 1, minWidth: 0 }}
                 />
+                <button type="submit" className="btn-primary" style={{ whiteSpace: "nowrap", fontSize: "1rem", padding: "0.9rem 1.5rem" }}>
+                  Отримати ціну →
+                </button>
               </div>
               {heroError && (
                 <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#C9603A", margin: 0 }}>
                   Помилка. Спробуйте ще раз.
                 </p>
               )}
-              <button type="submit" className="btn-primary" style={{ width: "100%", textAlign: "center", fontSize: "1.05rem", padding: "0.9rem 2rem" }}>
-                Отримати план і ціну →
-              </button>
+              <a
+                href="https://t.me/NS940828"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  window.gtag?.("event", "telegram_click", { event_category: "conversion", event_label: "hero" });
+                  window.fbq?.("trackCustom", "TelegramClick");
+                }}
+                style={{
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem",
+                  padding: "0.8rem 1.5rem", borderRadius: "0.75rem",
+                  background: "#E8F4FD", border: "1px solid #B8D8EC",
+                  fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.95rem",
+                  color: "#2AABEE", textDecoration: "none", transition: "background 0.2s",
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#2AABEE">
+                  <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.492-1.302.48-.428-.013-1.252-.242-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+                Написати в Telegram
+              </a>
             </form>
           )}
         </div>
@@ -854,7 +865,7 @@ function SectionTracker({ eventName }: { eventName: string }) {
 }
 
 function Contact() {
-  const [form, setForm] = useState({ name: "", phone: "" });
+  const [form, setForm] = useState({ phone: "" });
   const [sent, setSent] = useState(() => new URLSearchParams(window.location.search).get("success") === "true");
   const [error, setError] = useState(false);
   const [priceRevealed, setPriceRevealed] = useState(false);
@@ -903,7 +914,7 @@ function Contact() {
     try {
       const body = new URLSearchParams({
         "form-name": "contact",
-        name: form.name,
+        name: "",
         phone: form.phone,
       });
       const res = await fetch("/", {
@@ -1025,24 +1036,10 @@ function Contact() {
                 </div>
 
                 <div>
-                  <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Ваше ім'я *</label>
-                  <input
-                    className="ws-input"
-                    type="text"
-                    name="name"
-                    placeholder="Ім'я"
-                    autoComplete="name"
-                    value={form.name}
-                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                    required
-                  />
-                </div>
-
-                <div>
                   <label style={{ fontFamily: "Nunito, sans-serif", fontWeight: 600, fontSize: "0.875rem", color: "#5C3D2E", display: "block", marginBottom: "0.5rem" }}>Телефон *</label>
                   <input
                     className="ws-input"
-                    type="text"
+                    type="tel"
                     name="phone"
                     placeholder="+380 00 000 00 00"
                     autoComplete="tel"
@@ -1051,6 +1048,7 @@ function Contact() {
                     required
                   />
                 </div>
+                <input type="hidden" name="name" value="" />
 
                 {error && (
                   <p style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.85rem", color: "#C9603A", margin: 0, textAlign: "center" }}>
@@ -1059,6 +1057,36 @@ function Contact() {
                 )}
                 <button type="submit" className="btn-primary" style={{ width: "100%", textAlign: "center", marginTop: "0.25rem" }}>
                   Отримати план за 10 хвилин →
+                </button>
+
+                <div style={{ display: "flex", alignItems: "center", gap: "1rem", margin: "0.25rem 0" }}>
+                  <div style={{ flex: 1, height: "1px", background: "#E8D5C0" }} />
+                  <span style={{ fontFamily: "Nunito, sans-serif", fontSize: "0.8rem", color: "#9E7A65" }}>або</span>
+                  <div style={{ flex: 1, height: "1px", background: "#E8D5C0" }} />
+                </div>
+
+                <a
+                  href="https://t.me/NS940828"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    window.gtag?.("event", "telegram_click", { event_category: "conversion", event_label: "contact_form" });
+                    window.fbq?.("trackCustom", "TelegramClick");
+                  }}
+                  style={{
+                    display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem",
+                    padding: "0.85rem 1.5rem", borderRadius: "0.75rem",
+                    background: "#E8F4FD", border: "1px solid #B8D8EC",
+                    fontFamily: "Nunito, sans-serif", fontWeight: 700, fontSize: "0.95rem",
+                    color: "#2AABEE", textDecoration: "none", transition: "background 0.2s",
+                    width: "100%", boxSizing: "border-box",
+                  }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#2AABEE">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.492-1.302.48-.428-.013-1.252-.242-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                  </svg>
+                  Написати в Telegram
+                </a>
                 </button>
 
               </form>
